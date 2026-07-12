@@ -1,0 +1,51 @@
+2026-07-12 13:47:35 | INFO     | logger           | Logger initialized → C:\Users\a\Desktop\Py_ETL_SF-main\logs\etl_20260712_134735.log
+2026-07-12 13:47:35 | INFO     | main             | Pipeline started | Run ID: 64dbb6ee-55bb-439b-9acd-f08dbf4cfa23
+2026-07-12 13:47:35 | INFO     | utils            | Output directories verified: cleaned/, rejected/, logs/
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Starting extraction → customers.csv
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Customers: 520 rows | Columns: ['Customer_ID', 'Customer_Name', 'Email', 'Phone', 'City', 'State', 'Region', 'Join_Date']
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Customers extraction complete: 520 rows read.
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Starting extraction → products.csv
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Products: 108 rows | Columns: ['Product_ID', 'Product_Name', 'Category', 'Brand', 'Price']
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Products extraction complete: 108 rows read.
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Starting extraction → orders.csv
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Orders: 5047 rows | Columns: ['Order_ID', 'Customer_ID', 'Product_ID', 'Order_Date', 'Quantity', 'Unit_Price', 'Discount', 'Total_Amount', 'Order_Status', 'Payment_Method']
+2026-07-12 13:47:35 | INFO     | extract          | [EXTRACT] Orders extraction complete: 5047 rows read.
+2026-07-12 13:47:35 | INFO     | validate         | [VALIDATE] Starting customers validation...
+2026-07-12 13:47:35 | INFO     | validate         | [VALIDATE] Customers → Clean: 498  |  Rejected: 22
+2026-07-12 13:47:35 | INFO     | validate         | [VALIDATE] Starting products validation...
+2026-07-12 13:47:35 | INFO     | validate         | [VALIDATE] Products → Clean: 98  |  Rejected: 10
+2026-07-12 13:47:35 | INFO     | validate         | [VALIDATE] Starting orders validation...
+2026-07-12 13:47:37 | INFO     | validate         | [VALIDATE] Orders → Clean: 4,982  |  Rejected: 65
+2026-07-12 13:47:37 | INFO     | transform        | [TRANSFORM] Transforming customers...
+2026-07-12 13:47:37 | INFO     | transform        | [TRANSFORM] Customers transformed: 498 rows
+2026-07-12 13:47:37 | INFO     | transform        | [TRANSFORM] Transforming products...
+2026-07-12 13:47:37 | INFO     | transform        | [TRANSFORM] Products transformed: 98 rows
+2026-07-12 13:47:37 | INFO     | transform        | [TRANSFORM] Transforming orders...
+2026-07-12 13:47:37 | INFO     | transform        | [TRANSFORM] Orders transformed: 4,982 rows
+2026-07-12 13:47:37 | INFO     | utils            | [SAVE] 498 rows → C:\Users\a\Desktop\Py_ETL_SF-main\cleaned\customers_clean.csv [customers_clean]
+2026-07-12 13:47:37 | INFO     | utils            | [SAVE] 98 rows → C:\Users\a\Desktop\Py_ETL_SF-main\cleaned\products_clean.csv [products_clean]
+2026-07-12 13:47:37 | INFO     | utils            | [SAVE] 4982 rows → C:\Users\a\Desktop\Py_ETL_SF-main\cleaned\orders_clean.csv [orders_clean]
+2026-07-12 13:47:37 | INFO     | utils            | [SAVE] 22 rows → C:\Users\a\Desktop\Py_ETL_SF-main\rejected\customers_rejected.csv [customers_rejected]
+2026-07-12 13:47:37 | INFO     | utils            | [SAVE] 10 rows → C:\Users\a\Desktop\Py_ETL_SF-main\rejected\products_rejected.csv [products_rejected]
+2026-07-12 13:47:37 | INFO     | utils            | [SAVE] 65 rows → C:\Users\a\Desktop\Py_ETL_SF-main\rejected\orders_rejected.csv [orders_rejected]
+2026-07-12 13:47:38 | INFO     | db               | Establishing Snowflake connection...
+2026-07-12 13:47:38 | WARNING  | main             | Snowflake load skipped: Missing required environment variables: SNOWFLAKE_USER, SNOWFLAKE_PASSWORD, SNOWFLAKE_ACCOUNT, SNOWFLAKE_WAREHOUSE, SNOWFLAKE_DATABASE, SNOWFLAKE_SCHEMA
+→ Cleaned CSV files saved. Configure .env to enable Snowflake loading.
+2026-07-12 13:47:38 | INFO     | main             | 
+==============================================================
+  RETAIL SALES ANALYTICS — ETL PIPELINE SUMMARY
+==============================================================
+  Run ID        : 64dbb6ee-55bb-439b-9acd-f08dbf4cfa23
+  Completed At  : 2026-07-12 13:47:38
+  Duration      : 2.19 seconds
+  Status        : SUCCESS
+--------------------------------------------------------------
+  ENTITY            READ   LOADED   REJECTED
+--------------------------------------------------------------
+  CUSTOMERS          520        0         22
+  PRODUCTS           108        0         10
+  ORDERS            5047        0         65
+--------------------------------------------------------------
+  TOTAL             5675        0         97
+==============================================================
+2026-07-12 13:47:38 | INFO     | main             | Pipeline finished.

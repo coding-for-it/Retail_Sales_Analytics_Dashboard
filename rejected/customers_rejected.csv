@@ -1,0 +1,23 @@
+Customer_ID,Customer_Name,Email,Phone,City,State,Region,Join_Date,REJECT_REASON
+C0514,Rohan Pillai,no_domain,6753903309,Asansol,West Bengal,East,2023-09-09,Invalid Email
+C0327,,pooja.ghosh78@outlook.com,9930598266,Hubli,Karnataka,South,2021-10-30,Missing Customer_Name
+,Mohan Pillai,mohan.pillai88@outlook.com,6880839406,Panaji,Goa,West,2022-08-03,Missing Customer_ID
+C0516,Megha Shah,megha.shah19@outlook.com,abcdefghij,Silchar,Assam,East,2023-03-18,Invalid Phone (must be 10 digits)
+C0520,Palak Ghosh,palak.ghosh39@yahoo.com,9671159367,,Maharashtra,West,2022-02-15,Missing City
+C0517,Nisha Rao,nisha.rao53@outlook.com,00000000000,Chandigarh,Punjab,North,2023-07-21,Invalid Phone (must be 10 digits)
+C0153,,kavita.patel23@gmail.com,6241522640,Margao,Goa,West,2020-01-31,Missing Customer_Name
+C0495,,vikas.sharma26@outlook.com,8115115189,Karol Bagh,Delhi,North,2024-12-31,Duplicate Customer_ID; Missing Customer_Name
+C0153,Kavita Patel,kavita.patel23@gmail.com,6241522640,Margao,Goa,West,2020-01-31,Duplicate Customer_ID
+C0511,Sandeep Tiwari,notanemail,8226552991,Dehradun,Uttarakhand,North,2021-05-03,Invalid Email
+C0519,Palak Bhat,palak.bhat19@gmail.com,6278158234,Vadodara,Gujarat,Unknown,2024-06-11,Invalid Region (must be North/South/East/West)
+,Komal Gupta,komal.gupta10@gmail.com,6538642403,Prayagraj,Uttar Pradesh,North,2022-07-11,Missing Customer_ID; Duplicate Customer_ID
+C0513,Jatin Bhat,double@@gmail.com,9667840357,Bhopal,Madhya Pradesh,North,2020-09-17,Invalid Email
+C0286,Asha Singh,asha.singh8@yahoo.com,7651095672,Silchar,Assam,East,2022-04-30,Duplicate Customer_ID
+C0201,Vivek Gupta,vivek.gupta40@yahoo.com,7494966219,Panaji,Goa,West,2023-10-21,Duplicate Customer_ID
+C0327,Pooja Ghosh,pooja.ghosh78@outlook.com,9930598266,Hubli,Karnataka,South,2021-10-30,Duplicate Customer_ID
+C0296,Pooja Iyer,pooja.iyer18@outlook.com,8351429015,Jaipur,Rajasthan,North,2024-07-28,Duplicate Customer_ID
+C0512,Asha Desai,missing@,6954570592,Tirupati,Andhra Pradesh,South,2024-04-07,Invalid Email
+,Palak Rao,palak.rao60@outlook.com,7470405910,Jabalpur,Madhya Pradesh,North,2020-02-20,Missing Customer_ID; Duplicate Customer_ID
+C0515,Vivek Mishra,vivek.mishra16@gmail.com,123,Guntur,Andhra Pradesh,South,2023-11-06,Invalid Phone (must be 10 digits)
+C0139,Preeti Verma,preeti.verma94@gmail.com,6416872439,Dhanbad,Jharkhand,East,2021-10-31,Duplicate Customer_ID
+C0518,Sandeep Pillai,sandeep.pillai91@outlook.com,8609912042,Thrissur,Kerala,Central,2024-07-28,Invalid Region (must be North/South/East/West)

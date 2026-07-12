@@ -1,0 +1,66 @@
+Order_ID,Customer_ID,Product_ID,Order_Date,Quantity,Unit_Price,Discount,Total_Amount,Order_Status,Payment_Method,REJECT_REASON
+ORD05014,,P052,2024-07-14,5,299.0,0,1495.0,Completed,Cash,Missing Customer_ID
+ORD05032,C0001,P068,2024-01-13,1,-999.9,10,31499.1,Completed,UPI,Negative Unit_Price
+ORD05030,C0055,P029,2024-02-11,-7,1999.0,5,1899.05,Completed,Net Banking,Negative or zero Quantity
+ORD05044,C0223,P095,2025-06-20,7,129.0,30,632.1,Completed,EMI,Invalid Payment_Method
+ORD05029,C0311,P092,2024-03-13,-2,275.0,5,261.25,Completed,Net Banking,Negative or zero Quantity
+ORD05018,C0000,P065,2025-05-24,8,699.0,30,3914.4,Completed,UPI,Invalid Customer_ID (FK violation)
+ORD05045,C0097,P016,2025-02-06,4,54999.0,-10,186996.6,Pending,UPI,Discount out of range (allowed 0–90.0%)
+ORD05023,C0142,PXXX,2025-03-06,3,29990.0,5,85471.5,Completed,UPI,Invalid Product_ID (FK violation)
+ORD05016,C9999,P042,2024-03-21,1,9999.0,0,9999.0,Completed,UPI,Invalid Customer_ID (FK violation)
+ORD00299,C0327,P028,2024-01-12,4,1699.0,5,6456.2,Completed,UPI,Invalid Customer_ID (FK violation)
+,C0321,P008,2024-03-02,6,47999.0,30,201595.8,Completed,Card,Missing Order_ID
+ORD02573,C0153,P074,2025-04-03,10,399.0,15,3391.5,Cancelled,Net Banking,Invalid Customer_ID (FK violation)
+ORD05025,C0264,P019,2025-04-30,-1,73999.0,5,281196.2,Pending,UPI,Negative or zero Quantity
+ORD05047,C0346,P096,2024-12-18,8,179.0,100,1074.0,Completed,Card,Discount out of range (allowed 0–90.0%)
+ORD03251,C0327,P021,2024-12-15,7,14999.0,15,89244.05,Pending,Card,Invalid Customer_ID (FK violation)
+ORD05038,C0320,P025,2027-07-12,4,2499.0,0,9996.0,Completed,UPI,Future or invalid Order_Date
+ORD00361,C0327,P022,2024-08-03,10,12999.0,10,116991.0,Completed,UPI,Invalid Customer_ID (FK violation)
+ORD04438,C0153,P079,2025-02-04,9,399.0,20,2872.8,Completed,UPI,Invalid Customer_ID (FK violation)
+,C0203,P040,2024-11-12,9,1799.0,30,11333.7,Pending,Card,Missing Order_ID; Duplicate Order_ID
+ORD03277,C0153,P041,2024-02-13,8,2999.0,5,22792.4,Completed,Cash,Invalid Customer_ID (FK violation)
+ORD05043,C0416,P034,2024-06-25,7,2499.0,30,12245.1,Pending,Cheque,Invalid Payment_Method
+ORD05041,C0377,P070,2024-07-12,4,799.0,0,3196.0,Processing,UPI,Invalid Order_Status
+ORD01115,C0327,P037,2024-10-21,1,6995.0,0,6995.0,Completed,Net Banking,Invalid Customer_ID (FK violation)
+ORD00419,C0327,P079,2024-06-23,10,399.0,20,3192.0,Cancelled,UPI,Invalid Customer_ID (FK violation)
+ORD05046,C0096,P043,2025-04-11,3,7999.0,95,23997.0,Completed,Card,Discount out of range (allowed 0–90.0%)
+ORD01759,C0327,P013,2024-07-14,1,1499.0,0,1499.0,Completed,UPI,Invalid Customer_ID (FK violation)
+ORD05036,C0489,P074,2026-09-10,10,399.0,0,3990.0,Completed,UPI,Future or invalid Order_Date
+ORD05015,,P078,2025-04-24,3,799.0,5,2277.15,Pending,UPI,Missing Customer_ID
+ORD05017,CXXXXX,P016,2025-02-03,7,54999.0,0,384993.0,Pending,Card,Invalid Customer_ID (FK violation)
+ORD02650,C0037,P042,2025-02-24,4,9999.0,0,39996.0,Completed,UPI,Duplicate Order_ID
+,C0417,P045,2024-12-11,3,2999.0,10,8097.3,Completed,Card,Missing Order_ID; Duplicate Order_ID
+ORD02203,C0327,P069,2025-02-07,1,14999.0,0,14999.0,Completed,UPI,Invalid Customer_ID (FK violation)
+ORD05021,C0054,,2024-07-05,4,79999.0,30,223997.2,Completed,Card,Missing Product_ID
+ORD05037,C0474,P021,2026-10-10,3,14999.0,0,44997.0,Pending,Card,Future or invalid Order_Date
+ORD05022,C0168,P999,2025-04-20,8,12999.0,15,88393.2,Completed,Card,Invalid Product_ID (FK violation)
+,C0319,P034,2025-03-26,2,2499.0,5,4748.1,Completed,Card,Missing Order_ID; Duplicate Order_ID
+ORD01382,C0153,P082,2024-02-06,10,24999.0,0,249990.0,Completed,UPI,Invalid Customer_ID (FK violation)
+ORD05026,C0161,P048,2024-03-26,-5,28999.0,20,162394.4,Completed,Net Banking,Negative or zero Quantity
+ORD05020,C0230,,2024-11-18,10,3499.0,15,29741.5,Completed,UPI,Missing Product_ID
+ORD05027,C0500,P073,2025-03-15,-3,299.0,0,299.0,Pending,Cash,Negative or zero Quantity
+ORD05013,,P086,2025-05-08,2,12999.0,10,23398.2,Completed,Net Banking,Missing Customer_ID
+ORD05031,C0237,P055,2025-06-16,8,-100.0,15,2033.2,Completed,Card,Negative Unit_Price
+ORD05035,C0002,P040,2026-08-11,1,1799.0,0,1799.0,Completed,Net Banking,Future or invalid Order_Date
+ORD01436,C0327,P002,2025-06-20,4,134999.0,5,512996.2,Completed,UPI,Invalid Customer_ID (FK violation)
+ORD03743,C0153,P023,2024-04-14,6,5999.0,0,35994.0,Completed,UPI,Invalid Customer_ID (FK violation)
+ORD03233,C0153,P094,2025-05-04,1,399.0,15,339.15,Completed,Card,Invalid Customer_ID (FK violation)
+ORD05039,C0327,P037,2024-10-21,1,6995.0,0,6995.0,Dispatched,Net Banking,Invalid Customer_ID (FK violation); Invalid Order_Status
+ORD04653,C0406,P029,2025-04-19,10,1999.0,30,13993.0,Completed,UPI,Duplicate Order_ID
+ORD05024,C0029,P000,2025-05-12,1,31999.0,0,31999.0,Completed,Card,Invalid Product_ID (FK violation)
+ORD02007,C0327,P075,2024-03-24,2,399.0,5,758.1,Completed,Cash,Invalid Customer_ID (FK violation)
+ORD05028,C0091,P036,2024-04-12,0,22495.0,10,40491.0,Cancelled,Net Banking,Negative or zero Quantity
+ORD05019,C0358,,2024-08-02,7,699.0,10,4403.7,Completed,Card,Missing Product_ID
+ORD04483,C0222,P049,2025-06-19,7,31999.0,5,212793.35,Completed,Card,Duplicate Order_ID
+ORD02030,C0022,P024,2025-02-16,4,2499.0,30,6997.2,Completed,Card,Duplicate Order_ID
+ORD04559,C0153,P028,2024-02-01,7,1699.0,10,10703.7,Cancelled,Cash,Invalid Customer_ID (FK violation)
+ORD02879,C0029,P034,2025-03-12,7,2499.0,0,17493.0,Completed,UPI,Duplicate Order_ID
+ORD04471,C0410,P014,2024-05-13,2,29990.0,5,56981.0,Completed,UPI,Duplicate Order_ID
+ORD04663,C0153,P073,2025-06-28,7,299.0,5,1988.35,Completed,Card,Invalid Customer_ID (FK violation)
+ORD05034,C0215,P068,2024-08-07,5,-1.0,0,174995.0,Pending,UPI,Negative Unit_Price
+ORD05042,C0001,P009,2025-03-09,10,44999.0,5,427490.5,Completed,Crypto,Invalid Payment_Method
+ORD05033,C0130,P046,2025-06-16,2,-50.0,5,1898.1,Completed,Net Banking,Negative Unit_Price
+ORD00161,C0348,P078,2024-07-22,10,799.0,25,5992.5,Completed,Card,Duplicate Order_ID
+ORD05040,C0084,P006,2024-10-24,10,62999.0,10,566991.0,Unknown,Card,Invalid Order_Status
+ORD02912,C0153,P061,2024-04-29,4,2499.0,0,9996.0,Pending,Card,Invalid Customer_ID (FK violation)
+ORD03800,C0340,P055,2024-06-26,3,299.0,25,672.75,Completed,UPI,Duplicate Order_ID

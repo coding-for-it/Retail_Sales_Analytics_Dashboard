@@ -1,0 +1,485 @@
+-- ====================================================================
+-- RETAIL SALES ANALYTICS PLATFORM
+-- Snowflake Database Setup Script
+-- ====================================================================
+-- Run this script in Snowflake Worksheets before executing the ETL.
+-- Execute section by section in order.
+-- ====================================================================
+
+
+
+-- ====================================================================
+-- SECTION 1: DATABASE, SCHEMA, WAREHOUSE
+-- ====================================================================
+
+-- Create the database
+CREATE DATABASE IF NOT EXISTS RETAIL_DB
+    COMMENT = 'Retail Sales Analytics Platform';
+
+USE DATABASE RETAIL_DB;
+
+
+-- Create the schema
+CREATE SCHEMA IF NOT EXISTS RETAIL_SCHEMA
+    COMMENT = 'Schema for retail sales data warehouse';
+
+USE SCHEMA RETAIL_SCHEMA;
+
+
+-- Create the compute warehouse
+-- AUTO_SUSPEND = 60 seconds to avoid unnecessary credit usage
+CREATE WAREHOUSE IF NOT EXISTS RETAIL_WH
+    WAREHOUSE_SIZE    = 'X-SMALL'
+    AUTO_SUSPEND      = 60
+    AUTO_RESUME       = TRUE
+    INITIALLY_SUSPENDED = TRUE
+    COMMENT = 'Warehouse for Retail ETL and analytics queries';
+
+USE WAREHOUSE RETAIL_WH;
+
+
+
+-- ====================================================================
+-- SECTION 2: TABLES
+-- ====================================================================
+-- Table Design:
+--   CUSTOMERS  (master table - customer dimension)
+--   PRODUCTS   (master table - product dimension)
+--   ORDERS     (fact table - transactional data)
+--   ETL_LOGS   (operational - ETL run audit trail)
+-- ====================================================================
+
+
+-- ────────────────────────────────────────────────────────────────────
+-- CUSTOMERS TABLE
+-- Stores unique customer master data.
+-- ────────────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS CUSTOMERS
+(
+    CUSTOMER_ID    VARCHAR(20)   NOT NULL,    -- Primary Key: e.g. C0001
+    CUSTOMER_NAME  VARCHAR(100)  NOT NULL,    -- Full name (title-cased)
+    EMAIL          VARCHAR(150),              -- Valid email address
+    PHONE          VARCHAR(20),               -- 10-digit phone number
+    CITY           VARCHAR(100),              -- City name
+    STATE          VARCHAR(80),               -- Full state name (e.g. Maharashtra)
+    REGION         VARCHAR(20),               -- North / South / East / West
+    JOIN_DATE      DATE,                      -- Date customer registered
+
+    CONSTRAINT PK_CUSTOMERS PRIMARY KEY (CUSTOMER_ID)
+);
+
+
+-- ────────────────────────────────────────────────────────────────────
+-- PRODUCTS TABLE
+-- Stores product catalog with category and pricing.
+-- ────────────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS PRODUCTS
+(
+    PRODUCT_ID     VARCHAR(20)   NOT NULL,    -- Primary Key: e.g. P001
+    PRODUCT_NAME   VARCHAR(200)  NOT NULL,    -- Full product name (title-cased)
+    CATEGORY       VARCHAR(80)   NOT NULL,    -- Electronics / Fashion / etc.
+    BRAND          VARCHAR(80),               -- Brand name
+    PRICE          NUMBER(12, 2) NOT NULL,    -- Listed price in INR
+
+    CONSTRAINT PK_PRODUCTS PRIMARY KEY (PRODUCT_ID)
+);
+
+
+-- ────────────────────────────────────────────────────────────────────
+-- ORDERS TABLE
+-- Stores individual order/transaction records.
+-- Foreign keys reference CUSTOMERS and PRODUCTS.
+-- ────────────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS ORDERS
+(
+    ORDER_ID        VARCHAR(20)   NOT NULL,   -- Primary Key: e.g. ORD00001
+    CUSTOMER_ID     VARCHAR(20)   NOT NULL,   -- FK → CUSTOMERS.CUSTOMER_ID
+    PRODUCT_ID      VARCHAR(20)   NOT NULL,   -- FK → PRODUCTS.PRODUCT_ID
+    ORDER_DATE      DATE          NOT NULL,   -- Date order was placed
+    QUANTITY        INT           NOT NULL,   -- Units ordered (> 0)
+    UNIT_PRICE      NUMBER(12, 2) NOT NULL,   -- Price at time of order
+    DISCOUNT        NUMBER(5, 2)  DEFAULT 0,  -- Discount percentage (0–90)
+    TOTAL_AMOUNT    NUMBER(14, 2) NOT NULL,   -- = Qty * UnitPrice * (1 - Disc%)
+    ORDER_STATUS    VARCHAR(20)   NOT NULL,   -- Completed / Pending / Cancelled / Returned
+    PAYMENT_METHOD  VARCHAR(20)   NOT NULL,   -- UPI / Card / Cash / Net Banking
+
+    CONSTRAINT PK_ORDERS     PRIMARY KEY (ORDER_ID),
+    CONSTRAINT FK_ORD_CUST   FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID),
+    CONSTRAINT FK_ORD_PROD   FOREIGN KEY (PRODUCT_ID)  REFERENCES PRODUCTS(PRODUCT_ID)
+);
+
+
+-- ────────────────────────────────────────────────────────────────────
+-- ETL_LOGS TABLE
+-- Stores a record for every pipeline execution.
+-- Used for monitoring, audit, and alerting.
+-- ────────────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS ETL_LOGS
+(
+    RUN_ID          VARCHAR(40)   NOT NULL,   -- UUID generated by Python
+    START_TIME      TIMESTAMP_NTZ,            -- Pipeline start timestamp
+    END_TIME        TIMESTAMP_NTZ,            -- Pipeline end timestamp
+    ROWS_READ       INT,                      -- Total rows read from CSVs
+    ROWS_LOADED     INT,                      -- Total rows loaded to Snowflake
+    ROWS_REJECTED   INT,                      -- Total rows rejected by validation
+    STATUS          VARCHAR(20),              -- SUCCESS / FAILED
+    ERROR_MESSAGE   VARCHAR(2000),            -- Error details if FAILED
+
+    CONSTRAINT PK_ETL_LOGS PRIMARY KEY (RUN_ID)
+);
+
+
+
+-- ====================================================================
+-- SECTION 3: FILE FORMAT
+-- ====================================================================
+-- Defines how Snowflake should parse CSV files from the stage.
+-- ====================================================================
+
+CREATE OR REPLACE FILE FORMAT RETAIL_CSV_FORMAT
+    TYPE             = 'CSV'
+    FIELD_DELIMITER  = ','
+    RECORD_DELIMITER = '\n'
+    SKIP_HEADER      = 1
+    NULL_IF          = ('NULL', 'null', 'N/A', '')
+    EMPTY_FIELD_AS_NULL = TRUE
+    TRIM_SPACE       = TRUE
+    DATE_FORMAT      = 'YYYY-MM-DD'
+    COMMENT          = 'Standard CSV format for retail source files';
+
+
+
+-- ====================================================================
+-- SECTION 4: INTERNAL STAGES
+-- ====================================================================
+-- Stages are Snowflake-managed storage areas for CSV files.
+-- Upload files using SnowSQL: PUT file://path/to/file @STAGE_NAME;
+-- ====================================================================
+
+CREATE OR REPLACE STAGE CUSTOMERS_STAGE
+    FILE_FORMAT = RETAIL_CSV_FORMAT
+    COMMENT     = 'Stage for customers.csv uploads';
+
+CREATE OR REPLACE STAGE PRODUCTS_STAGE
+    FILE_FORMAT = RETAIL_CSV_FORMAT
+    COMMENT     = 'Stage for products.csv uploads';
+
+CREATE OR REPLACE STAGE ORDERS_STAGE
+    FILE_FORMAT = RETAIL_CSV_FORMAT
+    COMMENT     = 'Stage for orders.csv uploads';
+
+
+-- Verify staged files
+-- LIST @CUSTOMERS_STAGE;
+-- LIST @PRODUCTS_STAGE;
+-- LIST @ORDERS_STAGE;
+
+
+
+-- ====================================================================
+-- SECTION 5: COPY INTO (Stage → Tables)
+-- ====================================================================
+-- Run after uploading CSVs to the stages.
+-- The column mapping ensures correct field alignment.
+-- ====================================================================
+
+-- Load Customers
+COPY INTO CUSTOMERS (
+    CUSTOMER_ID, CUSTOMER_NAME, EMAIL,
+    PHONE, CITY, STATE, REGION, JOIN_DATE
+)
+FROM @CUSTOMERS_STAGE
+FILE_FORMAT = (FORMAT_NAME = 'RETAIL_CSV_FORMAT')
+ON_ERROR    = 'CONTINUE';  -- Skip bad rows, load clean rows
+
+
+-- Load Products
+COPY INTO PRODUCTS (
+    PRODUCT_ID, PRODUCT_NAME, CATEGORY, BRAND, PRICE
+)
+FROM @PRODUCTS_STAGE
+FILE_FORMAT = (FORMAT_NAME = 'RETAIL_CSV_FORMAT')
+ON_ERROR    = 'CONTINUE';
+
+
+-- Load Orders
+COPY INTO ORDERS (
+    ORDER_ID, CUSTOMER_ID, PRODUCT_ID, ORDER_DATE,
+    QUANTITY, UNIT_PRICE, DISCOUNT, TOTAL_AMOUNT,
+    ORDER_STATUS, PAYMENT_METHOD
+)
+FROM @ORDERS_STAGE
+FILE_FORMAT = (FORMAT_NAME = 'RETAIL_CSV_FORMAT')
+ON_ERROR    = 'CONTINUE';
+
+
+
+-- ====================================================================
+-- SECTION 6: VIEWS
+-- ====================================================================
+-- Views provide pre-built analytics queries for Power BI and dashboards.
+-- ====================================================================
+
+
+-- ────────────────────────────────────────────────────────────────────
+-- VW_MONTHLY_SALES
+-- Monthly revenue, orders, and average order value trend
+-- ────────────────────────────────────────────────────────────────────
+CREATE OR REPLACE VIEW VW_MONTHLY_SALES AS
+SELECT
+    YEAR(O.ORDER_DATE)                              AS YEAR,
+    MONTH(O.ORDER_DATE)                             AS MONTH,
+    TO_CHAR(O.ORDER_DATE, 'YYYY-MM')               AS YEAR_MONTH,
+    MONTHNAME(O.ORDER_DATE)                         AS MONTH_NAME,
+    COUNT(DISTINCT O.ORDER_ID)                     AS TOTAL_ORDERS,
+    COUNT(DISTINCT O.CUSTOMER_ID)                  AS UNIQUE_CUSTOMERS,
+    SUM(O.TOTAL_AMOUNT)                            AS TOTAL_REVENUE,
+    ROUND(AVG(O.TOTAL_AMOUNT), 2)                  AS AVG_ORDER_VALUE,
+    SUM(O.QUANTITY)                                AS TOTAL_UNITS_SOLD
+FROM
+    ORDERS O
+WHERE
+    O.ORDER_STATUS != 'Cancelled'
+GROUP BY
+    YEAR(O.ORDER_DATE),
+    MONTH(O.ORDER_DATE),
+    TO_CHAR(O.ORDER_DATE, 'YYYY-MM'),
+    MONTHNAME(O.ORDER_DATE)
+ORDER BY
+    YEAR, MONTH;
+
+
+-- ────────────────────────────────────────────────────────────────────
+-- VW_CUSTOMER_ANALYTICS
+-- Customer-level analytics: spend, orders, LTV, segmentation
+-- ────────────────────────────────────────────────────────────────────
+CREATE OR REPLACE VIEW VW_CUSTOMER_ANALYTICS AS
+SELECT
+    C.CUSTOMER_ID,
+    C.CUSTOMER_NAME,
+    C.CITY,
+    C.STATE,
+    C.REGION,
+    C.JOIN_DATE,
+    COUNT(DISTINCT O.ORDER_ID)                      AS TOTAL_ORDERS,
+    SUM(O.TOTAL_AMOUNT)                             AS TOTAL_SPENT,
+    ROUND(AVG(O.TOTAL_AMOUNT), 2)                   AS AVG_ORDER_VALUE,
+    MIN(O.ORDER_DATE)                               AS FIRST_ORDER_DATE,
+    MAX(O.ORDER_DATE)                               AS LAST_ORDER_DATE,
+    DATEDIFF('day', MIN(O.ORDER_DATE),
+             MAX(O.ORDER_DATE))                     AS CUSTOMER_TENURE_DAYS,
+    CASE
+        WHEN SUM(O.TOTAL_AMOUNT) >= 500000  THEN 'Platinum'
+        WHEN SUM(O.TOTAL_AMOUNT) >= 200000  THEN 'Gold'
+        WHEN SUM(O.TOTAL_AMOUNT) >= 50000   THEN 'Silver'
+        ELSE 'Bronze'
+    END                                             AS CUSTOMER_SEGMENT,
+    CASE
+        WHEN COUNT(DISTINCT O.ORDER_ID) > 1 THEN 'Repeat'
+        ELSE 'One-Time'
+    END                                             AS CUSTOMER_TYPE
+FROM
+    CUSTOMERS C
+    LEFT JOIN ORDERS O
+        ON C.CUSTOMER_ID = O.CUSTOMER_ID
+        AND O.ORDER_STATUS != 'Cancelled'
+GROUP BY
+    C.CUSTOMER_ID, C.CUSTOMER_NAME, C.CITY,
+    C.STATE, C.REGION, C.JOIN_DATE;
+
+
+-- ────────────────────────────────────────────────────────────────────
+-- VW_PRODUCT_PERFORMANCE
+-- Product revenue, rank, category contribution %
+-- ────────────────────────────────────────────────────────────────────
+CREATE OR REPLACE VIEW VW_PRODUCT_PERFORMANCE AS
+WITH CATEGORY_TOTALS AS (
+    SELECT
+        P.CATEGORY,
+        SUM(O.TOTAL_AMOUNT) AS CATEGORY_REVENUE
+    FROM
+        PRODUCTS P
+        JOIN ORDERS O ON P.PRODUCT_ID = O.PRODUCT_ID
+    WHERE
+        O.ORDER_STATUS != 'Cancelled'
+    GROUP BY
+        P.CATEGORY
+)
+SELECT
+    P.PRODUCT_ID,
+    P.PRODUCT_NAME,
+    P.CATEGORY,
+    P.BRAND,
+    P.PRICE                                                             AS LISTED_PRICE,
+    COUNT(DISTINCT O.ORDER_ID)                                          AS TOTAL_ORDERS,
+    SUM(O.QUANTITY)                                                     AS TOTAL_UNITS_SOLD,
+    SUM(O.TOTAL_AMOUNT)                                                 AS TOTAL_REVENUE,
+    ROUND(AVG(O.TOTAL_AMOUNT), 2)                                       AS AVG_ORDER_VALUE,
+    RANK() OVER (ORDER BY SUM(O.TOTAL_AMOUNT) DESC)                     AS REVENUE_RANK,
+    RANK() OVER (PARTITION BY P.CATEGORY
+                 ORDER BY SUM(O.TOTAL_AMOUNT) DESC)                     AS CATEGORY_RANK,
+    ROUND(SUM(O.TOTAL_AMOUNT) * 100.0 / CT.CATEGORY_REVENUE, 2)        AS CATEGORY_CONTRIBUTION_PCT,
+    ROUND(SUM(O.TOTAL_AMOUNT) * 100.0 /
+          SUM(SUM(O.TOTAL_AMOUNT)) OVER (), 2)                          AS OVERALL_CONTRIBUTION_PCT
+FROM
+    PRODUCTS P
+    JOIN ORDERS O ON P.PRODUCT_ID = O.PRODUCT_ID
+    JOIN CATEGORY_TOTALS CT ON P.CATEGORY = CT.CATEGORY
+WHERE
+    O.ORDER_STATUS != 'Cancelled'
+GROUP BY
+    P.PRODUCT_ID, P.PRODUCT_NAME, P.CATEGORY,
+    P.BRAND, P.PRICE, CT.CATEGORY_REVENUE;
+
+
+
+-- ====================================================================
+-- SECTION 7: STORED PROCEDURE
+-- ====================================================================
+-- LOAD_RETAIL_DATA() automates the complete data loading workflow.
+-- Call it manually or let the Task call it on a schedule.
+-- ====================================================================
+
+CREATE OR REPLACE PROCEDURE LOAD_RETAIL_DATA()
+RETURNS STRING
+LANGUAGE SQL
+AS
+$$
+DECLARE
+    v_rows_customers INT;
+    v_rows_products  INT;
+    v_rows_orders    INT;
+    v_start_time     TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP();
+BEGIN
+
+    -- Step 1: Load Customers from stage
+    COPY INTO CUSTOMERS (
+        CUSTOMER_ID, CUSTOMER_NAME, EMAIL,
+        PHONE, CITY, STATE, REGION, JOIN_DATE
+    )
+    FROM @CUSTOMERS_STAGE
+    FILE_FORMAT = (FORMAT_NAME = 'RETAIL_CSV_FORMAT')
+    ON_ERROR    = 'CONTINUE';
+
+    -- Step 2: Load Products from stage
+    COPY INTO PRODUCTS (
+        PRODUCT_ID, PRODUCT_NAME, CATEGORY, BRAND, PRICE
+    )
+    FROM @PRODUCTS_STAGE
+    FILE_FORMAT = (FORMAT_NAME = 'RETAIL_CSV_FORMAT')
+    ON_ERROR    = 'CONTINUE';
+
+    -- Step 3: Load Orders from stage
+    COPY INTO ORDERS (
+        ORDER_ID, CUSTOMER_ID, PRODUCT_ID, ORDER_DATE,
+        QUANTITY, UNIT_PRICE, DISCOUNT, TOTAL_AMOUNT,
+        ORDER_STATUS, PAYMENT_METHOD
+    )
+    FROM @ORDERS_STAGE
+    FILE_FORMAT = (FORMAT_NAME = 'RETAIL_CSV_FORMAT')
+    ON_ERROR    = 'CONTINUE';
+
+    -- Step 4: Log this run
+    INSERT INTO ETL_LOGS (
+        RUN_ID, START_TIME, END_TIME,
+        ROWS_READ, ROWS_LOADED, ROWS_REJECTED,
+        STATUS, ERROR_MESSAGE
+    )
+    SELECT
+        UUID_STRING(),
+        :v_start_time,
+        CURRENT_TIMESTAMP(),
+        (SELECT COUNT(*) FROM CUSTOMERS) +
+        (SELECT COUNT(*) FROM PRODUCTS) +
+        (SELECT COUNT(*) FROM ORDERS),
+        (SELECT COUNT(*) FROM CUSTOMERS) +
+        (SELECT COUNT(*) FROM PRODUCTS) +
+        (SELECT COUNT(*) FROM ORDERS),
+        0,
+        'SUCCESS',
+        '';
+
+    RETURN 'RETAIL DATA LOADED SUCCESSFULLY AT ' || TO_CHAR(CURRENT_TIMESTAMP());
+
+END;
+$$;
+
+
+-- Test the stored procedure
+-- CALL LOAD_RETAIL_DATA();
+
+
+
+-- ====================================================================
+-- SECTION 8: SCHEDULED TASK
+-- ====================================================================
+-- DAILY_RETAIL_LOAD runs every day at 2:00 AM IST (8:30 PM UTC).
+-- It calls the stored procedure to load the previous day's files.
+-- ====================================================================
+
+CREATE OR REPLACE TASK DAILY_RETAIL_LOAD
+    WAREHOUSE = RETAIL_WH
+    SCHEDULE  = 'USING CRON 30 20 * * * UTC'  -- 2:00 AM IST daily
+    COMMENT   = 'Daily ETL task: loads retail CSV files into Snowflake'
+AS
+    CALL LOAD_RETAIL_DATA();
+
+
+-- Enable the task (tasks start in SUSPENDED state by default)
+ALTER TASK DAILY_RETAIL_LOAD RESUME;
+
+-- Check task status
+-- SHOW TASKS;
+
+-- Manually trigger for testing (without waiting for schedule)
+-- EXECUTE TASK DAILY_RETAIL_LOAD;
+
+-- View task run history
+-- SELECT *
+-- FROM TABLE(INFORMATION_SCHEMA.TASK_HISTORY())
+-- WHERE NAME = 'DAILY_RETAIL_LOAD'
+-- ORDER BY SCHEDULED_TIME DESC;
+
+
+
+-- ====================================================================
+-- SECTION 9: VERIFICATION QUERIES
+-- ====================================================================
+
+-- Check row counts in all tables
+SELECT 'CUSTOMERS' AS TABLE_NAME, COUNT(*) AS ROW_COUNT FROM CUSTOMERS
+UNION ALL
+SELECT 'PRODUCTS',  COUNT(*) FROM PRODUCTS
+UNION ALL
+SELECT 'ORDERS',    COUNT(*) FROM ORDERS
+UNION ALL
+SELECT 'ETL_LOGS',  COUNT(*) FROM ETL_LOGS;
+
+
+-- Preview each table
+SELECT * FROM CUSTOMERS LIMIT 5;
+SELECT * FROM PRODUCTS  LIMIT 5;
+SELECT * FROM ORDERS    LIMIT 5;
+SELECT * FROM ETL_LOGS  LIMIT 5;
+
+
+-- Check views
+SELECT * FROM VW_MONTHLY_SALES      LIMIT 12;
+SELECT * FROM VW_CUSTOMER_ANALYTICS LIMIT 10;
+SELECT * FROM VW_PRODUCT_PERFORMANCE LIMIT 10;
+
+
+
+-- ====================================================================
+-- UTILITY: RESET TABLES (for re-testing)
+-- ====================================================================
+-- WARNING: This deletes all data. Use only during development.
+-- ====================================================================
+
+-- TRUNCATE TABLE ORDERS;
+-- TRUNCATE TABLE CUSTOMERS;
+-- TRUNCATE TABLE PRODUCTS;
+-- TRUNCATE TABLE ETL_LOGS;
+-- REMOVE @CUSTOMERS_STAGE;
+-- REMOVE @PRODUCTS_STAGE;
+-- REMOVE @ORDERS_STAGE;

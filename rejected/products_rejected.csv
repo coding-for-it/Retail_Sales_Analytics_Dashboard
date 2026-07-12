@@ -1,0 +1,11 @@
+Product_ID,Product_Name,Category,Brand,Price,REJECT_REASON
+P107,Maybelline Fit Me Foundation,Beauty,Maybelline,-1.0,Negative or zero Price
+,HP LaserJet Printer,Electronics,HP,14999.0,Missing Product_ID
+P104,Biotique Bio Honey Gel Facewash,Misc,Biotique,299.0,Invalid or missing Category
+P108,SanDisk 512GB USB Drive,Electronics,SanDisk,0.0,Negative or zero Price
+P106,Global Desi Printed Saree,Fashion,Global Desi,-99.99,Negative or zero Price
+P105,Yonex Badminton Racquet,Unknown Category,Yonex,2499.0,Invalid or missing Category
+P033,H&M Floral Kurta,Fashion,H&M,1299.0,Duplicate Product_ID
+,Nykaa Cosmetics Lip Liner,Beauty,Nykaa,299.0,Missing Product_ID; Duplicate Product_ID
+P083,Ikea Kallax Shelf Unit,Furniture,Ikea,7999.0,Duplicate Product_ID
+P103,,Electronics,Lenovo,47999.0,Missing Product_Name

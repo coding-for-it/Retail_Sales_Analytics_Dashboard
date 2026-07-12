@@ -1,0 +1,33 @@
+2026-07-12 14:49:52 | INFO     | logger           | Logger initialized → C:\Users\a\Desktop\Py_ETL_SF-main\logs\etl_20260712_144952.log
+2026-07-12 14:49:52 | INFO     | main             | Pipeline started | Run ID: e105e8dc-05e9-4b2e-8270-5adcc39cda00
+2026-07-12 14:49:52 | INFO     | utils            | Output directories verified: cleaned/, rejected/, logs/
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Starting extraction → customers.csv
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Customers: 520 rows | Columns: ['Customer_ID', 'Customer_Name', 'Email', 'Phone', 'City', 'State', 'Region', 'Join_Date']
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Customers extraction complete: 520 rows read.
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Starting extraction → products.csv
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Products: 108 rows | Columns: ['Product_ID', 'Product_Name', 'Category', 'Brand', 'Price']
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Products extraction complete: 108 rows read.
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Starting extraction → orders.csv
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Orders: 5047 rows | Columns: ['Order_ID', 'Customer_ID', 'Product_ID', 'Order_Date', 'Quantity', 'Unit_Price', 'Discount', 'Total_Amount', 'Order_Status', 'Payment_Method']
+2026-07-12 14:49:52 | INFO     | extract          | [EXTRACT] Orders extraction complete: 5047 rows read.
+2026-07-12 14:49:52 | INFO     | validate         | [VALIDATE] Starting customers validation...
+2026-07-12 14:49:52 | INFO     | validate         | [VALIDATE] Customers → Clean: 498  |  Rejected: 22
+2026-07-12 14:49:52 | INFO     | validate         | [VALIDATE] Starting products validation...
+2026-07-12 14:49:52 | INFO     | validate         | [VALIDATE] Products → Clean: 98  |  Rejected: 10
+2026-07-12 14:49:52 | INFO     | validate         | [VALIDATE] Starting orders validation...
+2026-07-12 14:49:54 | INFO     | validate         | [VALIDATE] Orders → Clean: 4,982  |  Rejected: 65
+2026-07-12 14:49:54 | INFO     | transform        | [TRANSFORM] Transforming customers...
+2026-07-12 14:49:54 | INFO     | transform        | [TRANSFORM] Customers transformed: 498 rows
+2026-07-12 14:49:54 | INFO     | transform        | [TRANSFORM] Transforming products...
+2026-07-12 14:49:54 | INFO     | transform        | [TRANSFORM] Products transformed: 98 rows
+2026-07-12 14:49:54 | INFO     | transform        | [TRANSFORM] Transforming orders...
+2026-07-12 14:49:54 | INFO     | transform        | [TRANSFORM] Orders transformed: 4,982 rows
+2026-07-12 14:49:54 | INFO     | utils            | [SAVE] 498 rows → C:\Users\a\Desktop\Py_ETL_SF-main\cleaned\customers_clean.csv [customers_clean]
+2026-07-12 14:49:54 | INFO     | utils            | [SAVE] 98 rows → C:\Users\a\Desktop\Py_ETL_SF-main\cleaned\products_clean.csv [products_clean]
+2026-07-12 14:49:54 | INFO     | utils            | [SAVE] 4982 rows → C:\Users\a\Desktop\Py_ETL_SF-main\cleaned\orders_clean.csv [orders_clean]
+2026-07-12 14:49:54 | INFO     | utils            | [SAVE] 22 rows → C:\Users\a\Desktop\Py_ETL_SF-main\rejected\customers_rejected.csv [customers_rejected]
+2026-07-12 14:49:54 | INFO     | utils            | [SAVE] 10 rows → C:\Users\a\Desktop\Py_ETL_SF-main\rejected\products_rejected.csv [products_rejected]
+2026-07-12 14:49:54 | INFO     | utils            | [SAVE] 65 rows → C:\Users\a\Desktop\Py_ETL_SF-main\rejected\orders_rejected.csv [orders_rejected]
+2026-07-12 14:49:55 | INFO     | db               | Establishing Snowflake connection...
+2026-07-12 14:49:58 | INFO     | db               | Snowflake connection established successfully.
+2026-07-12 14:50:00 | INFO     | load             | [LOAD] Existing data cleared from Snowflake tables.
