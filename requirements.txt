@@ -1,4 +1,16 @@
-pandas
-snowflake-connector-python
-python-dotenv
-pytest
+# ─────────────────────────────────────────────────────────────────────────────
+# RETAIL SALES ANALYTICS PLATFORM — PYTHON DEPENDENCIES
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Data Processing & Analysis
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Snowflake Integration
+snowflake-connector-python>=3.0.0
+
+# Configuration & Environment
+python-dotenv>=1.0.0
+
+# Testing & Quality Assurance
+pytest>=7.0.0

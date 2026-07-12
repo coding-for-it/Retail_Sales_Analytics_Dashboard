@@ -1,0 +1,41 @@
+# Environment variables / secrets
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+logs/
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Snowflake / database credentials
+*.pem
+*.key
+credentials.json
+config.ini
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Data files (optional - avoid uploading large datasets)
+data/raw/
+data/*.csv
