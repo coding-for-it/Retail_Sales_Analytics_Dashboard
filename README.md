@@ -58,8 +58,6 @@ The project demonstrates modern data engineering concepts including ETL automati
         │ ETL Monitoring                               │
         └──────────────────────────────────────────────┘
 ```
-```
-
 ---
 
 ## 🛠️ Tech Stack
