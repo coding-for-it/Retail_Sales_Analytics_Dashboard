@@ -17,6 +17,7 @@ import logging
 import pandas as pd
 
 from src.config import STATE_MAP
+from src.utils import smart_title
 
 logger = logging.getLogger("retail_etl")
 
@@ -32,11 +33,11 @@ def transform_customers(df: pd.DataFrame) -> pd.DataFrame:
     Operations:
       - Strip leading/trailing whitespace from all string columns
       - Upper-case Customer_ID for consistency
-      - Title-case Customer_Name (e.g. 'ravi kumar' → 'Ravi Kumar')
+      - Smart title-case Customer_Name (preserving acronyms/brands)
       - Expand State abbreviations to full names (e.g. 'MH' → 'Maharashtra')
-      - Title-case State if not found in the abbreviation map
+      - Smart title-case State if not found in the abbreviation map
       - Parse Join_Date from string to date object (invalid dates → None)
-      - Title-case City
+      - Smart title-case City
 
     Args:
         df: Validated customers DataFrame (all string columns)
@@ -54,15 +55,15 @@ def transform_customers(df: pd.DataFrame) -> pd.DataFrame:
     # Standardize Customer_ID
     df["Customer_ID"] = df["Customer_ID"].str.upper()
 
-    # Title-case name
-    df["Customer_Name"] = df["Customer_Name"].str.title()
+    # Title-case name with brand/acronym preservation
+    df["Customer_Name"] = df["Customer_Name"].apply(smart_title)
 
     # City title-case
-    df["City"] = df["City"].str.title()
+    df["City"] = df["City"].apply(smart_title)
 
     # Expand state abbreviations → full name
     df["State"] = df["State"].apply(
-        lambda x: STATE_MAP.get(str(x).upper().strip(), str(x).strip().title())
+        lambda x: STATE_MAP.get(str(x).upper().strip(), smart_title(x))
         if pd.notna(x) else x
     )
 
@@ -84,7 +85,7 @@ def transform_products(df: pd.DataFrame) -> pd.DataFrame:
     Operations:
       - Strip whitespace from all string columns
       - Upper-case Product_ID for consistency
-      - Title-case Product_Name and Brand
+      - Smart title-case Product_Name and Brand (preserving acronyms & brands)
       - Strip Category (keep exact casing from config)
       - Cast Price to float, round to 2 decimal places
 
@@ -104,9 +105,9 @@ def transform_products(df: pd.DataFrame) -> pd.DataFrame:
     # Standardize IDs
     df["Product_ID"] = df["Product_ID"].str.upper()
 
-    # Title-case names
-    df["Product_Name"] = df["Product_Name"].str.title()
-    df["Brand"]        = df["Brand"].str.title()
+    # Smart title-case names (preserving acronyms & brands)
+    df["Product_Name"] = df["Product_Name"].apply(smart_title)
+    df["Brand"]        = df["Brand"].apply(smart_title)
 
     # Category strip (exact values already validated)
     df["Category"] = df["Category"].str.strip()

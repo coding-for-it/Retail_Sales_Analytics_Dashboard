@@ -48,7 +48,7 @@ def _read_csv(file_path: str, label: str) -> pd.DataFrame:
     if not os.path.exists(file_path):
         raise FileNotFoundError(
             f"[EXTRACT] {label} source file not found: '{file_path}'\n"
-            f"  → Place the CSV file in the data/ directory and retry."
+            f"  -> Place the CSV file in the data/ directory and retry."
         )
 
     df = pd.read_csv(file_path, dtype=str, keep_default_na=False)

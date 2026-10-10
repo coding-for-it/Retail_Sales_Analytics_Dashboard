@@ -1,0 +1,45 @@
+Customer_ID,Customer_Name,Email,Phone,City,State,Region,Join_Date
+C0001,Rahul Reddy,rahul.reddy1@gmail.com,6599310825,New Delhi,Delhi,North,2024-02-17
+C0002,Rohan Joshi,rohan.joshi2@yahoo.com,6136505587,Lucknow,Uttar Pradesh,North,2020-03-02
+C0003,Meera Mehta,meera.mehta3@outlook.com,6113971123,Ludhiana,Punjab,North,2023-02-23
+C0004,Meera Gupta,meera.gupta4@outlook.com,7194819984,Hyderabad,Telangana,South,2024-07-15
+C0005,Kavita Das,kavita.das5@yahoo.com,6667779376,Ludhiana,Punjab,North,2021-03-16
+C0006,Rohan Nair,rohan.nair6@gmail.com,7541804686,Kolkata,West Bengal,East,2024-10-01
+C0007,Priya Kumar,priya.kumar7@yahoo.com,8303082117,Patna,Bihar,East,2020-09-12
+C0008,Neha Bose,neha.bose8@outlook.com,9802986287,Pune,Maharashtra,West,2024-10-30
+C0009,Rohan Sharma,rohan.sharma9@outlook.com,6978815630,Bhubaneswar,Odisha,East,2024-05-02
+C0010,Meera Patel,meera.patel10@yahoo.com,7193887545,Kolkata,West Bengal,East,2022-07-17
+C0011,Pooja Das,pooja.das11@gmail.com,8878380452,Bhubaneswar,Odisha,East,2021-06-30
+C0012,Ananya Mehta,ananya.mehta12@outlook.com,7051454923,Lucknow,Uttar Pradesh,North,2020-11-30
+C0013,Rahul Bose,rahul.bose13@outlook.com,8392080953,Surat,Gujarat,West,2021-03-25
+C0014,Meera Sharma,meera.sharma14@yahoo.com,7722989659,Kolkata,West Bengal,East,2021-07-02
+C0015,Amit Reddy,amit.reddy15@outlook.com,8144181937,Ludhiana,Punjab,North,2022-03-21
+C0016,Rahul Iyer,rahul.iyer16@gmail.com,9199703321,Pune,Maharashtra,West,2023-02-23
+C0017,Arjun Das,arjun.das17@gmail.com,6594130308,Guwahati,Assam,East,2022-11-09
+C0018,Priya Patel,priya.patel18@gmail.com,8694860228,Pune,Maharashtra,West,2020-11-23
+C0019,Rohan Nair,rohan.nair19@yahoo.com,8559321289,Panaji,Goa,West,2022-08-16
+C0020,Sneha Bose,sneha.bose20@outlook.com,9224995600,Kolkata,West Bengal,East,2021-06-30
+C0021,Neha Nair,neha.nair21@gmail.com,7948728483,Kolkata,West Bengal,East,2020-01-07
+C0022,Sneha Bose,sneha.bose22@yahoo.com,9614942327,Bhubaneswar,Odisha,East,2023-08-01
+C0023,Pooja Iyer,pooja.iyer23@outlook.com,9344175247,Chennai,Tamil Nadu,South,2022-12-22
+C0024,Amit Gupta,amit.gupta24@gmail.com,6480468219,Lucknow,Uttar Pradesh,North,2022-01-13
+C0025,Priya Reddy,priya.reddy25@outlook.com,6338258951,Bhubaneswar,Odisha,East,2020-06-24
+C0026,Vikram Iyer,vikram.iyer26@outlook.com,8041322270,Pune,Maharashtra,West,2023-01-30
+C0027,Kavita Reddy,kavita.reddy27@outlook.com,9243839315,Kochi,Kerala,South,2024-02-03
+C0028,Arjun Bose,arjun.bose28@outlook.com,7603828849,Kochi,Kerala,South,2022-06-16
+C0029,Meera Reddy,meera.reddy29@gmail.com,7452066459,Pune,Maharashtra,West,2020-02-13
+C0030,Aarav Patel,aarav.patel30@outlook.com,8710566582,Chennai,Tamil Nadu,South,2020-04-30
+C9000,Rahul Reddy,no_domain,6599310825,New Delhi,Delhi,North,2024-02-17
+C8000,Rohan Joshi,rohan.joshi2@yahoo.com,12345,Lucknow,Uttar Pradesh,North,2020-03-02
+C7000,,meera.mehta3@outlook.com,6113971123,Ludhiana,Punjab,North,2023-02-23
+C6000,Meera Gupta,meera.gupta4@outlook.com,7194819984,Hyderabad,Telangana,Central,2024-07-15
+C5000,Kavita Das,kavita.das5@yahoo.com,6667779376,,Punjab,North,2021-03-16
+,Rohan Nair,rohan.nair6@gmail.com,7541804686,Kolkata,West Bengal,East,2024-10-01
+C0007,Priya Kumar,priya.kumar7@yahoo.com,8303082117,Patna,Bihar,East,2020-09-12
+C9001,Rohan Joshi,no_domain,6136505587,Lucknow,Uttar Pradesh,North,2020-03-02
+C8001,Meera Mehta,meera.mehta3@outlook.com,12345,Ludhiana,Punjab,North,2023-02-23
+C7001,,meera.gupta4@outlook.com,7194819984,Hyderabad,Telangana,South,2024-07-15
+C6001,Kavita Das,kavita.das5@yahoo.com,6667779376,Ludhiana,Punjab,Central,2021-03-16
+C5001,Rohan Nair,rohan.nair6@gmail.com,7541804686,,West Bengal,East,2024-10-01
+,Priya Kumar,priya.kumar7@yahoo.com,8303082117,Patna,Bihar,East,2020-09-12
+C0008,Neha Bose,neha.bose8@outlook.com,9802986287,Pune,Maharashtra,West,2024-10-30

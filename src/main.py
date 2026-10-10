@@ -81,7 +81,7 @@ def run_pipeline() -> None:
         "orders":    {"read": 0, "loaded": 0, "rejected": 0},
     }
 
-    print_separator("RETAIL SALES ANALYTICS — ETL PIPELINE")
+    print_separator("RETAIL SALES ANALYTICS - ETL PIPELINE")
     logger.info(f"Pipeline started | Run ID: {run_id}")
 
     # ── Step 1: Setup ─────────────────────────────────────────────────────────
@@ -89,7 +89,7 @@ def run_pipeline() -> None:
 
     try:
         # ── Step 2: Extract ───────────────────────────────────────────────────
-        print_separator("PHASE 1 — EXTRACT")
+        print_separator("PHASE 1 - EXTRACT")
         raw_customers = extract_customers()
         raw_products  = extract_products()
         raw_orders    = extract_orders()
@@ -99,14 +99,18 @@ def run_pipeline() -> None:
         stats["orders"]["read"]    = len(raw_orders)
 
         # ── Step 3: Validate ──────────────────────────────────────────────────
-        print_separator("PHASE 2 — VALIDATE")
+        print_separator("PHASE 2 - VALIDATE")
 
         clean_customers, rejected_customers = validate_customers(raw_customers)
         clean_products,  rejected_products  = validate_products(raw_products)
 
         # Build FK reference sets from validated entities
-        valid_customer_ids = set(clean_customers["Customer_ID"].str.upper())
-        valid_product_ids  = set(clean_products["Product_ID"].str.upper())
+        valid_customer_ids = set(
+            clean_customers["Customer_ID"].astype(str).str.strip().str.upper()
+        )
+        valid_product_ids = set(
+            clean_products["Product_ID"].astype(str).str.strip().str.upper()
+        )
 
         clean_orders, rejected_orders = validate_orders(
             raw_orders, valid_customer_ids, valid_product_ids
@@ -117,13 +121,13 @@ def run_pipeline() -> None:
         stats["orders"]["rejected"]    = len(rejected_orders)
 
         # ── Step 4: Transform ─────────────────────────────────────────────────
-        print_separator("PHASE 3 — TRANSFORM")
+        print_separator("PHASE 3 - TRANSFORM")
         transformed_customers = transform_customers(clean_customers)
         transformed_products  = transform_products(clean_products)
         transformed_orders    = transform_orders(clean_orders)
 
         # ── Step 5: Save outputs ──────────────────────────────────────────────
-        print_separator("PHASE 4 — SAVE OUTPUTS")
+        print_separator("PHASE 4 - SAVE OUTPUTS")
         save_csv(transformed_customers, CUSTOMERS_CLEAN,    "customers_clean")
         save_csv(transformed_products,  PRODUCTS_CLEAN,     "products_clean")
         save_csv(transformed_orders,    ORDERS_CLEAN,       "orders_clean")
@@ -133,7 +137,7 @@ def run_pipeline() -> None:
         save_csv(rejected_orders,       ORDERS_REJECTED,    "orders_rejected")
 
         # ── Step 6 & 7: Load Snowflake ────────────────────────────────────────
-        print_separator("PHASE 5 — LOAD TO SNOWFLAKE")
+        print_separator("PHASE 5 - LOAD TO SNOWFLAKE")
         try:
             from src.db   import get_connection
             from src.load import (
@@ -167,10 +171,10 @@ def run_pipeline() -> None:
         except Exception as sf_err:
             logger.warning(
                 f"Snowflake load skipped: {sf_err}\n"
-                "→ Cleaned CSV files saved. Configure .env to enable Snowflake loading."
+                "-> Cleaned CSV files saved. Configure .env to enable Snowflake loading."
             )
             print(
-                "\n  ⚠  Snowflake not configured — data saved locally.\n"
+                "\n  [WARNING] Snowflake not configured - data saved locally.\n"
                 "     Add credentials to .env and re-run to load into Snowflake.\n"
             )
 

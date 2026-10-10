@@ -79,7 +79,11 @@ The project demonstrates modern data engineering concepts including ETL automati
 ## 📂 Project Structure
 
 ```text
-Py_ETL_SF-main/
+Retail_Sales_Analytics_Dashboard-main/
+│
+├── .github/
+│   └── workflows/
+│       └── pytest.yml              # GitHub Actions CI workflow
 │
 ├── data/                           # Raw source datasets
 │   ├── customers.csv
@@ -104,21 +108,19 @@ Py_ETL_SF-main/
 │   ├── config.py                   # Project configuration & constants
 │   ├── db.py                       # Snowflake connection
 │   ├── extract.py                  # CSV extraction
-│   ├── validate.py                 # 24+ data quality validation rules
-│   ├── transform.py                # Data cleaning & transformations
+│   ├── validate.py                 # Candidate-aware data quality validation rules
+│   ├── transform.py                # Data cleaning & smart title transformation
 │   ├── load.py                     # Bulk loading into Snowflake using executemany()
-│   ├── utils.py                    # Helper functions & ETL summary
+│   ├── utils.py                    # Helpers, smart_title & ETL summary
 │   ├── logger.py                   # Centralized logging
 │   └── main.py                     # ETL pipeline orchestration
 │
 ├── sql/
 │   ├── retail_db_setup.sql         # Database, warehouse, tables & views
-│   ├── analysis_queries.sql        # Business analytics SQL queries
-│   └── vw_orders.sql               # Analytical view used by Power BI
+│   └── analysis_queries.sql        # Business analytics SQL queries
 │
 ├── powerbi/
-│   ├── Retail_Sales_Dashboard.pbix
-│   └── POWERBI_GUIDE.md
+│   └── PowerBI Dashboard.pbix
 │
 ├── tests/
 │   ├── test_connection.py
@@ -128,15 +130,17 @@ Py_ETL_SF-main/
 ├── scripts/
 │   └── generate_data.py            # Generates sample retail datasets
 │
-├── .env.example                    # Snowflake credential template
+├── pytest.ini                      # Pytest configuration
 ├── requirements.txt                # Python dependencies
 └── README.md
 ```
 ---
 
-## ⚡ Data Quality (24 Validation Rules)
+## ⚡ Data Quality (27 Validation Rules)
 
-To ensure that only high-quality data reaches the Snowflake warehouse, the ETL pipeline performs **24 automated validation checks** across customer, product, and order datasets. Records failing any validation are tagged with a descriptive `REJECT_REASON` and written to the `rejected/` folder, while valid records continue through the transformation and loading pipeline.
+To ensure that only high-quality data reaches the Snowflake warehouse, the ETL pipeline performs **27 automated validation checks** across customer, product, and order datasets. Records failing any validation are tagged with a descriptive `REJECT_REASON` and written to the `rejected/` folder, while valid records continue through the transformation and loading pipeline.
+
+Candidate-aware validation ensures that if an early record with a duplicate ID is invalid, subsequent valid records with that ID are preserved rather than being prematurely rejected as duplicates.
 
 ### Customer Validation (8 Rules)
 
@@ -158,13 +162,15 @@ To ensure that only high-quality data reaches the Snowflake warehouse, the ETL p
 - Category validation against approved categories
 - Positive price validation (Price > 0)
 
-### Order Validation (10 Rules)
+### Order Validation (13 Rules)
 
 - Blank row detection
 - Missing Order ID
 - Duplicate Order ID
-- Missing Customer ID / Product ID
-- Foreign Key validation against valid Customers and Products
+- Missing Customer ID
+- Foreign Key validation against valid Customers
+- Missing Product ID
+- Foreign Key validation against valid Products
 - Quantity greater than zero
 - Unit Price greater than zero
 - Order Date cannot be in the future
@@ -238,14 +244,26 @@ This creates:
 
 ## 5. Execute the ETL Pipeline
 
+Run with default dataset in `data/`:
+
 ```bash
 python -m src.main
+```
+
+Or target specific dataset subfolders using `DATA_SUBDIR`:
+
+```powershell
+# Run small test dataset (data/small_test_set)
+$env:DATA_SUBDIR="small_test_set"; python -m src.main
+
+# Run standard test dataset (data/standard_test_set)
+$env:DATA_SUBDIR="standard_test_set"; python -m src.main
 ```
 
 Pipeline Flow:
 
 1. Extract CSV files
-2. Validate data (24 checks)
+2. Validate data (27 checks)
 3. Transform clean records
 4. Save Cleaned & Rejected CSVs
 5. Load validated records into Snowflake using **executemany()**

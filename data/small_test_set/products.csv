@@ -1,0 +1,19 @@
+Product_ID,Product_Name,Category,Brand,Price
+P001,Samsung Galaxy S24,Electronics,Samsung,89999.0
+P002,HP Pavilion Laptop,Electronics,HP,54999.0
+P003,Sony WH-1000XM5,Electronics,Sony,29990.0
+P004,boAt Airdopes 141,Electronics,boAt,1499.0
+P005,LG OLED TV 48in,Electronics,LG,79999.0
+P006,Levi's 511 Jeans,Fashion,Levi's,3999.0
+P007,Nike Air Max 270,Fashion,Nike,9999.0
+P008,Titan Raga Watch,Fashion,Titan,6995.0
+P009,Philips Air Fryer,Home & Kitchen,Philips,9999.0
+P010,Prestige Induction Cooktop,Home & Kitchen,Prestige,2999.0
+P011,Milton Flask 1L,Home & Kitchen,Milton,999.0
+P012,Lakme 9to5 Foundation,Beauty,Lakme,699.0
+P900,Test Item,Electronics,Brand,-100.0
+P800,Test Item,Electronics,Brand,0.0
+P700,Test Item,Misc,Brand,499.0
+,Test Item,Books,Brand,299.0
+P600,,Books,Brand,299.0
+P001,Samsung Galaxy S24,Electronics,Samsung,89999.0

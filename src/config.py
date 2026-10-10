@@ -17,7 +17,9 @@ import os
 
 BASE_DIR     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DATA_DIR     = os.path.join(BASE_DIR, "data")
+# DATA_SUBDIR can be passed via environment variable (e.g. 'small_test_set', 'standard_test_set')
+DATA_SUBDIR  = os.getenv("DATA_SUBDIR", "").strip()
+DATA_DIR     = os.path.join(BASE_DIR, "data", DATA_SUBDIR) if DATA_SUBDIR else os.path.join(BASE_DIR, "data")
 CLEANED_DIR  = os.path.join(BASE_DIR, "cleaned")
 REJECTED_DIR = os.path.join(BASE_DIR, "rejected")
 LOGS_DIR     = os.path.join(BASE_DIR, "logs")

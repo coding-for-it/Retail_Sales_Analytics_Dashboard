@@ -51,9 +51,11 @@ class TestTransformCustomers:
         assert result["State"].iloc[0] == "Maharashtra"
 
     def test_state_unknown_abbreviation_title_cased(self):
-        """Unknown state code should be title-cased as-is."""
+        """Unknown state code should preserve acronym casing if uppercase."""
         result = transform_customers(self._base_df(State="XX"))
-        assert result["State"].iloc[0] == "Xx"  # title case
+        assert result["State"].iloc[0] == "XX"
+        result_lower = transform_customers(self._base_df(State="unknown state"))
+        assert result_lower["State"].iloc[0] == "Unknown State"
 
     def test_city_stripped_and_title_cased(self):
         """City with extra spaces should be stripped and title-cased."""
@@ -111,6 +113,29 @@ class TestTransformProducts:
         """Brand should be title-cased and whitespace stripped."""
         result = transform_products(self._base_df(Brand="  apple  "))
         assert result["Brand"].iloc[0] == "Apple"
+
+    def test_brand_preserves_acronyms_and_brands(self):
+        """Brand casing should preserve special brand names and acronyms."""
+        brands_to_test = {
+            "boat": "boAt",
+            "hp": "HP",
+            "lg": "LG",
+            "jbl": "JBL",
+        }
+        for input_b, expected_b in brands_to_test.items():
+            result = transform_products(self._base_df(Brand=input_b))
+            assert result["Brand"].iloc[0] == expected_b
+
+    def test_product_name_preserves_acronyms(self):
+        """Product name transformation should preserve acronyms like TV, OLED, 4K, USB."""
+        names_to_test = {
+            "lg oled 48 inch tv": "LG OLED 48 Inch TV",
+            "hp pavilion 14 laptop": "HP Pavilion 14 Laptop",
+            "samsung 55 inch 4k smart tv": "Samsung 55 Inch 4K Smart TV",
+        }
+        for input_p, expected_p in names_to_test.items():
+            result = transform_products(self._base_df(Product_Name=input_p))
+            assert result["Product_Name"].iloc[0] == expected_p
 
     def test_price_cast_to_float(self):
         """Price should be a float after transformation."""

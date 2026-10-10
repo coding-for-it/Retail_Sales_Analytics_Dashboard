@@ -1,11 +1,25 @@
 Product_ID,Product_Name,Category,Brand,Price,REJECT_REASON
-P107,Maybelline Fit Me Foundation,Beauty,Maybelline,-1.0,Negative or zero Price
-,HP LaserJet Printer,Electronics,HP,14999.0,Missing Product_ID
-P104,Biotique Bio Honey Gel Facewash,Misc,Biotique,299.0,Invalid or missing Category
-P108,SanDisk 512GB USB Drive,Electronics,SanDisk,0.0,Negative or zero Price
-P106,Global Desi Printed Saree,Fashion,Global Desi,-99.99,Negative or zero Price
-P105,Yonex Badminton Racquet,Unknown Category,Yonex,2499.0,Invalid or missing Category
-P033,H&M Floral Kurta,Fashion,H&M,1299.0,Duplicate Product_ID
-,Nykaa Cosmetics Lip Liner,Beauty,Nykaa,299.0,Missing Product_ID; Duplicate Product_ID
-P083,Ikea Kallax Shelf Unit,Furniture,Ikea,7999.0,Duplicate Product_ID
-P103,,Electronics,Lenovo,47999.0,Missing Product_Name
+P900,Test Item,Electronics,Brand,-100.0,Negative or zero Price
+P800,Test Item,Electronics,Brand,0.0,Negative or zero Price
+P700,Test Item,Misc,Brand,499.0,Invalid or missing Category
+,Test Item,Books,Brand,299.0,Missing Product_ID
+P600,,Books,Brand,299.0,Missing Product_Name
+P001,Samsung Galaxy S24,Electronics,Samsung,89999.0,Duplicate Product_ID
+P901,Test Item,Electronics,Brand,-100.0,Negative or zero Price
+P801,Test Item,Electronics,Brand,0.0,Negative or zero Price
+P701,Test Item,Misc,Brand,499.0,Invalid or missing Category
+,Test Item,Books,Brand,299.0,Missing Product_ID
+P601,,Books,Brand,299.0,Missing Product_Name
+P002,HP Pavilion Laptop,Electronics,HP,54999.0,Duplicate Product_ID
+P902,Test Item,Electronics,Brand,-100.0,Negative or zero Price
+P802,Test Item,Electronics,Brand,0.0,Negative or zero Price
+P702,Test Item,Misc,Brand,499.0,Invalid or missing Category
+,Test Item,Books,Brand,299.0,Missing Product_ID
+P602,,Books,Brand,299.0,Missing Product_Name
+P003,Sony WH-1000XM5,Electronics,Sony,29990.0,Duplicate Product_ID
+P903,Test Item,Electronics,Brand,-100.0,Negative or zero Price
+P803,Test Item,Electronics,Brand,0.0,Negative or zero Price
+P703,Test Item,Misc,Brand,499.0,Invalid or missing Category
+,Test Item,Books,Brand,299.0,Missing Product_ID
+P603,,Books,Brand,299.0,Missing Product_Name
+P004,boAt Airdopes 141,Electronics,boAt,1499.0,Duplicate Product_ID

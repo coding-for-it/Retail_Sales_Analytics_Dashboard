@@ -127,15 +127,11 @@ def validate_customers(df: pd.DataFrame) -> tuple:
     not_blank = ~blank_mask
 
     # Rule 2: Missing Customer_ID
-    null_id = df["Customer_ID"].isnull()
+    null_id = df["Customer_ID"].isnull() | (df["Customer_ID"].astype(str).str.strip() == "")
     _tag_rejected(df, null_id & not_blank, "Missing Customer_ID")
 
-    # Rule 3: Duplicate Customer_ID (keep first occurrence)
-    dup_id = df.duplicated(subset=["Customer_ID"], keep="first")
-    _tag_rejected(df, dup_id, "Duplicate Customer_ID")
-
     # Rule 4: Missing Customer_Name
-    null_name = df["Customer_Name"].isnull()
+    null_name = df["Customer_Name"].isnull() | (df["Customer_Name"].astype(str).str.strip() == "")
     _tag_rejected(df, null_name & not_blank, "Missing Customer_Name")
 
     # Rule 5: Invalid Email
@@ -164,9 +160,26 @@ def validate_customers(df: pd.DataFrame) -> tuple:
     # Rule 8: Missing City
     _tag_rejected(
         df,
-        df["City"].isnull() & not_blank,
+        (df["City"].isnull() | (df["City"].astype(str).str.strip() == "")) & not_blank,
         "Missing City",
     )
+
+    # Rule 3: Duplicate Customer_ID (keep first valid occurrence, normalized)
+    seen_valid_ids = set()
+    dup_mask = []
+    for reason, cid_raw in zip(df["REJECT_REASON"], df["Customer_ID"]):
+        if cid_raw is None or pd.isna(cid_raw) or str(cid_raw).strip() == "":
+            dup_mask.append(False)
+            continue
+        cid_norm = str(cid_raw).strip().upper()
+        if cid_norm in seen_valid_ids:
+            dup_mask.append(True)
+        else:
+            dup_mask.append(False)
+            if not reason:
+                seen_valid_ids.add(cid_norm)
+
+    _tag_rejected(df, pd.Series(dup_mask, index=df.index), "Duplicate Customer_ID")
 
     clean, rejected = _split_clean_rejected(df)
     logger.info(
@@ -208,17 +221,10 @@ def validate_products(df: pd.DataFrame) -> tuple:
     not_blank = ~blank_mask
 
     # Rule 2: Missing Product_ID
-    _tag_rejected(df, df["Product_ID"].isnull() & not_blank, "Missing Product_ID")
-
-    # Rule 3: Duplicate Product_ID
-    _tag_rejected(
-        df,
-        df.duplicated(subset=["Product_ID"], keep="first"),
-        "Duplicate Product_ID",
-    )
+    _tag_rejected(df, (df["Product_ID"].isnull() | (df["Product_ID"].astype(str).str.strip() == "")) & not_blank, "Missing Product_ID")
 
     # Rule 4: Missing Product_Name
-    _tag_rejected(df, df["Product_Name"].isnull() & not_blank, "Missing Product_Name")
+    _tag_rejected(df, (df["Product_Name"].isnull() | (df["Product_Name"].astype(str).str.strip() == "")) & not_blank, "Missing Product_Name")
 
     # Rule 5: Invalid Category
     _tag_rejected(
@@ -238,6 +244,23 @@ def validate_products(df: pd.DataFrame) -> tuple:
 
     _tag_rejected(df, df["Price"].apply(_bad_price) & not_blank, "Negative or zero Price")
 
+    # Rule 3: Duplicate Product_ID (keep first valid occurrence, normalized)
+    seen_valid_pids = set()
+    dup_pmask = []
+    for reason, pid_raw in zip(df["REJECT_REASON"], df["Product_ID"]):
+        if pid_raw is None or pd.isna(pid_raw) or str(pid_raw).strip() == "":
+            dup_pmask.append(False)
+            continue
+        pid_norm = str(pid_raw).strip().upper()
+        if pid_norm in seen_valid_pids:
+            dup_pmask.append(True)
+        else:
+            dup_pmask.append(False)
+            if not reason:
+                seen_valid_pids.add(pid_norm)
+
+    _tag_rejected(df, pd.Series(dup_pmask, index=df.index), "Duplicate Product_ID")
+
     clean, rejected = _split_clean_rejected(df)
     logger.info(
         f"[VALIDATE] Products → Clean: {len(clean):,}  |  Rejected: {len(rejected):,}"
@@ -255,30 +278,7 @@ def validate_orders(
     valid_product_ids: set,
 ) -> tuple:
     """
-    Apply 10 validation rules to the raw orders DataFrame.
-
-    Rules:
-      1.  Blank row              — all fields are null
-      2.  Missing Order_ID       — Order_ID is null or empty
-      3.  Duplicate Order_ID     — same Order_ID appears more than once
-      4.  Missing Customer_ID    — Customer_ID is null or empty
-      5.  Invalid Customer_ID    — FK violation (not in clean customers)
-      6.  Missing Product_ID     — Product_ID is null or empty
-      7.  Invalid Product_ID     — FK violation (not in clean products)
-      8.  Invalid Quantity       — null, non-numeric, negative, or zero
-      9.  Invalid Unit_Price     — null, non-numeric, or negative
-      10. Future/Invalid Date    — Order_Date is in the future or unparseable
-      11. Invalid Order_Status   — not in allowed values
-      12. Invalid Payment_Method — not in allowed values
-      13. Discount out of range  — < 0 or > MAX_DISCOUNT_PCT
-
-    Args:
-        df                : Raw orders DataFrame (all string columns)
-        valid_customer_ids: Set of Customer_IDs from the clean customers DataFrame
-        valid_product_ids : Set of Product_IDs from the clean products DataFrame
-
-    Returns:
-        (clean_df, rejected_df): Tuple of DataFrames
+    Apply validation rules to the raw orders DataFrame.
     """
     logger.info("[VALIDATE] Starting orders validation...")
     df = df.copy()
@@ -291,22 +291,15 @@ def validate_orders(
     not_blank = ~blank_mask
 
     # Rule 2: Missing Order_ID
-    _tag_rejected(df, df["Order_ID"].isnull() & not_blank, "Missing Order_ID")
-
-    # Rule 3: Duplicate Order_ID
-    _tag_rejected(
-        df,
-        df.duplicated(subset=["Order_ID"], keep="first"),
-        "Duplicate Order_ID",
-    )
+    _tag_rejected(df, (df["Order_ID"].isnull() | (df["Order_ID"].astype(str).str.strip() == "")) & not_blank, "Missing Order_ID")
 
     # Rule 4: Missing Customer_ID
-    null_cid = df["Customer_ID"].isnull()
+    null_cid = df["Customer_ID"].isnull() | (df["Customer_ID"].astype(str).str.strip() == "")
     _tag_rejected(df, null_cid & not_blank, "Missing Customer_ID")
 
     # Rule 5: Invalid Customer_ID (FK check)
     def _invalid_customer(val: object) -> bool:
-        if val is None:
+        if val is None or pd.isna(val) or str(val).strip() == "":
             return False   # already caught by Rule 4
         return str(val).strip().upper() not in valid_customer_ids
 
@@ -317,12 +310,12 @@ def validate_orders(
     )
 
     # Rule 6: Missing Product_ID
-    null_pid = df["Product_ID"].isnull()
+    null_pid = df["Product_ID"].isnull() | (df["Product_ID"].astype(str).str.strip() == "")
     _tag_rejected(df, null_pid & not_blank, "Missing Product_ID")
 
     # Rule 7: Invalid Product_ID (FK check)
     def _invalid_product(val: object) -> bool:
-        if val is None:
+        if val is None or pd.isna(val) or str(val).strip() == "":
             return False   # already caught by Rule 6
         return str(val).strip().upper() not in valid_product_ids
 
@@ -394,6 +387,23 @@ def validate_orders(
         df["Discount"].apply(_bad_discount) & not_blank,
         f"Discount out of range (allowed 0–{MAX_DISCOUNT_PCT}%)",
     )
+
+    # Rule 3: Duplicate Order_ID (keep first valid occurrence, normalized)
+    seen_valid_oids = set()
+    dup_omask = []
+    for reason, oid_raw in zip(df["REJECT_REASON"], df["Order_ID"]):
+        if oid_raw is None or pd.isna(oid_raw) or str(oid_raw).strip() == "":
+            dup_omask.append(False)
+            continue
+        oid_norm = str(oid_raw).strip().upper()
+        if oid_norm in seen_valid_oids:
+            dup_omask.append(True)
+        else:
+            dup_omask.append(False)
+            if not reason:
+                seen_valid_oids.add(oid_norm)
+
+    _tag_rejected(df, pd.Series(dup_omask, index=df.index), "Duplicate Order_ID")
 
     clean, rejected = _split_clean_rejected(df)
     logger.info(

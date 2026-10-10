@@ -339,3 +339,40 @@ class TestValidateOrders:
         df = make_order(Discount="0")
         clean, rejected = validate_orders(df, VALID_CIDS, VALID_PIDS)
         assert len(clean) == 1
+
+    def test_duplicate_customer_first_invalid_row_preserves_valid_customer_and_prevents_fk_bug(self):
+        """
+        Reproduce & verify fix: When the first occurrence of a Customer_ID is invalid,
+        the subsequent valid occurrence must be preserved so that valid orders referencing
+        that Customer_ID do not fail FK validation.
+        """
+        bad_customer = make_customer(Customer_ID="C0001", Email="bad_email")
+        good_customer = make_customer(Customer_ID="C0001", Email="valid.user@gmail.com")
+        cust_df = pd.concat([bad_customer, good_customer], ignore_index=True)
+
+        clean_cust, rejected_cust = validate_customers(cust_df)
+        assert len(clean_cust) == 1
+        assert len(rejected_cust) == 1
+        assert "Invalid Email" in rejected_cust.iloc[0]["REJECT_REASON"]
+
+        # Valid Customer IDs set
+        valid_cids = set(clean_cust["Customer_ID"].astype(str).str.strip().str.upper())
+        assert "C0001" in valid_cids
+
+        # Order for C0001 should pass FK validation
+        order_df = make_order(Customer_ID="C0001")
+        clean_ord, rejected_ord = validate_orders(order_df, valid_cids, VALID_PIDS)
+        assert len(clean_ord) == 1
+        assert len(rejected_ord) == 0
+
+    def test_duplicate_check_handles_case_and_whitespace_differences(self):
+        """Duplicate check should normalize case and whitespace when tagging duplicate IDs."""
+        row1 = make_customer(Customer_ID="c0001 ")
+        row2 = make_customer(Customer_ID="C0001")
+        df = pd.concat([row1, row2], ignore_index=True)
+
+        clean, rejected = validate_customers(df)
+        assert len(clean) == 1
+        assert len(rejected) == 1
+        assert "Duplicate Customer_ID" in rejected.iloc[0]["REJECT_REASON"]
+

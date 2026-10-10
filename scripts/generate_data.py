@@ -473,7 +473,7 @@ def generate_orders(
 
 def main() -> None:
     print("=" * 60)
-    print("  Retail Sales Analytics — Sample Data Generator")
+    print("  Retail Sales Analytics - Sample Data Generator")
     print("=" * 60)
 
     # Customers
@@ -481,14 +481,14 @@ def main() -> None:
     customers_df = generate_customers(500)
     cust_path = os.path.join(DATA_DIR, "customers.csv")
     customers_df.to_csv(cust_path, index=False)
-    print(f"      Saved {len(customers_df)} rows → {cust_path}")
+    print(f"      Saved {len(customers_df)} rows -> {cust_path}")
 
     # Products
     print("[2/3] Generating products...")
     products_df = generate_products()
     prod_path = os.path.join(DATA_DIR, "products.csv")
     products_df.to_csv(prod_path, index=False)
-    print(f"      Saved {len(products_df)} rows → {prod_path}")
+    print(f"      Saved {len(products_df)} rows -> {prod_path}")
 
     # Orders — use clean IDs for FK references
     print("[3/3] Generating orders...")

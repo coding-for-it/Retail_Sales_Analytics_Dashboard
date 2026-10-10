@@ -154,7 +154,7 @@ def generate_etl_summary(
     lines = [
         "",
         "=" * 62,
-        "  RETAIL SALES ANALYTICS — ETL PIPELINE SUMMARY",
+        "  RETAIL SALES ANALYTICS - ETL PIPELINE SUMMARY",
         "=" * 62,
         f"  Run ID        : {run_id}",
         f"  Completed At  : {now}",
@@ -184,3 +184,75 @@ def generate_etl_summary(
         lines.append("=" * 62)
 
     return "\n".join(lines)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TITLE CASING & BRAND / ACRONYM PRESERVATION
+# ─────────────────────────────────────────────────────────────────────────────
+
+SPECIAL_CASING: dict = {
+    "boat": "boAt",
+    "iphone": "iPhone",
+    "ipad": "iPad",
+    "airpods": "AirPods",
+    "airdopes": "Airdopes",
+    "oneplus": "OnePlus",
+    "realme": "Realme",
+    "h&m": "H&M",
+    "hp": "HP",
+    "lg": "LG",
+    "tv": "TV",
+    "oled": "OLED",
+    "lcd": "LCD",
+    "led": "LED",
+    "usb": "USB",
+    "gps": "GPS",
+    "wifi": "WiFi",
+    "4k": "4K",
+    "5g": "5G",
+    "xxl": "XXL",
+    "gb": "GB",
+    "tb": "TB",
+    "mb": "MB",
+    "jbl": "JBL",
+    "dsc": "DSC",
+    "upi": "UPI",
+    "fhd": "FHD",
+    "qhd": "QHD",
+    "uhd": "UHD",
+    "8k": "8K",
+    "ac1200": "AC1200",
+    "l'oreal": "L'Oreal",
+    "levi's": "Levi's",
+}
+
+
+def smart_title(text: object) -> object:
+    """
+    Title-case text while preserving brand names and acronyms.
+
+    - Preserves known brand casing (e.g. 'boAt', 'iPhone', 'H&M', 'L'Oreal', "Levi's")
+    - Preserves acronyms (e.g. 'HP', 'LG', 'TV', 'OLED', 'USB', '4K', '5G')
+    - Title-cases standard words (e.g. 'samsung galaxy' -> 'Samsung Galaxy')
+    """
+    if pd.isna(text) or text is None:
+        return text
+    s = str(text).strip()
+    if not s:
+        return s
+
+    words = s.split()
+    transformed_words = []
+    for w in words:
+        w_lower = w.lower()
+        if w_lower in SPECIAL_CASING:
+            transformed_words.append(SPECIAL_CASING[w_lower])
+        elif w.isupper() and len(w) >= 2:
+            transformed_words.append(w)
+        elif any(c.isupper() for c in w[1:]):
+            transformed_words.append(w)
+        else:
+            transformed_words.append(w.capitalize())
+
+    return " ".join(transformed_words)
+

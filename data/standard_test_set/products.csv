@@ -1,0 +1,133 @@
+Product_ID,Product_Name,Category,Brand,Price
+P001,Samsung Galaxy S24,Electronics,Samsung,89999.0
+P002,HP Pavilion Laptop,Electronics,HP,54999.0
+P003,Sony WH-1000XM5,Electronics,Sony,29990.0
+P004,boAt Airdopes 141,Electronics,boAt,1499.0
+P005,LG OLED TV 48in,Electronics,LG,79999.0
+P006,Levi's 511 Jeans,Fashion,Levi's,3999.0
+P007,Nike Air Max 270,Fashion,Nike,9999.0
+P008,Titan Raga Watch,Fashion,Titan,6995.0
+P009,Philips Air Fryer,Home & Kitchen,Philips,9999.0
+P010,Prestige Induction Cooktop,Home & Kitchen,Prestige,2999.0
+P011,Milton Flask 1L,Home & Kitchen,Milton,999.0
+P012,Lakme 9to5 Foundation,Beauty,Lakme,699.0
+P013,Dove Body Lotion,Beauty,Dove,299.0
+P014,Yonex Badminton Racquet,Sports,Yonex,2499.0
+P015,Cosco Football,Sports,Cosco,899.0
+P016,Atomic Habits,Books,Atomic,499.0
+P017,Deep Work,Books,Deep,399.0
+P018,Wakefit Mattress,Furniture,Wakefit,12999.0
+P019,Godrej Wardrobe,Furniture,Godrej,34999.0
+P020,Aashirvaad Atta 10Kg,Groceries,Aashirvaad,499.0
+P021,Amul Butter 500g,Groceries,Amul,275.0
+P022,Tata Salt 1Kg,Groceries,Tata,25.0
+P023,Samsung Galaxy S24 v2,Electronics,Samsung,89999.0
+P024,HP Pavilion Laptop v2,Electronics,HP,54999.0
+P025,Sony WH-1000XM5 v2,Electronics,Sony,29990.0
+P026,boAt Airdopes 141 v2,Electronics,boAt,1499.0
+P027,LG OLED TV 48in v2,Electronics,LG,79999.0
+P028,Levi's 511 Jeans v2,Fashion,Levi's,3999.0
+P029,Nike Air Max 270 v2,Fashion,Nike,9999.0
+P030,Titan Raga Watch v2,Fashion,Titan,6995.0
+P031,Philips Air Fryer v2,Home & Kitchen,Philips,9999.0
+P032,Prestige Induction Cooktop v2,Home & Kitchen,Prestige,2999.0
+P033,Milton Flask 1L v2,Home & Kitchen,Milton,999.0
+P034,Lakme 9to5 Foundation v2,Beauty,Lakme,699.0
+P035,Dove Body Lotion v2,Beauty,Dove,299.0
+P036,Yonex Badminton Racquet v2,Sports,Yonex,2499.0
+P037,Cosco Football v2,Sports,Cosco,899.0
+P038,Atomic Habits v2,Books,Atomic,499.0
+P039,Deep Work v2,Books,Deep,399.0
+P040,Wakefit Mattress v2,Furniture,Wakefit,12999.0
+P041,Godrej Wardrobe v2,Furniture,Godrej,34999.0
+P042,Aashirvaad Atta 10Kg v2,Groceries,Aashirvaad,499.0
+P043,Amul Butter 500g v2,Groceries,Amul,275.0
+P044,Tata Salt 1Kg v2,Groceries,Tata,25.0
+P045,Samsung Galaxy S24 v3,Electronics,Samsung,89999.0
+P046,HP Pavilion Laptop v3,Electronics,HP,54999.0
+P047,Sony WH-1000XM5 v3,Electronics,Sony,29990.0
+P048,boAt Airdopes 141 v3,Electronics,boAt,1499.0
+P049,LG OLED TV 48in v3,Electronics,LG,79999.0
+P050,Levi's 511 Jeans v3,Fashion,Levi's,3999.0
+P051,Nike Air Max 270 v3,Fashion,Nike,9999.0
+P052,Titan Raga Watch v3,Fashion,Titan,6995.0
+P053,Philips Air Fryer v3,Home & Kitchen,Philips,9999.0
+P054,Prestige Induction Cooktop v3,Home & Kitchen,Prestige,2999.0
+P055,Milton Flask 1L v3,Home & Kitchen,Milton,999.0
+P056,Lakme 9to5 Foundation v3,Beauty,Lakme,699.0
+P057,Dove Body Lotion v3,Beauty,Dove,299.0
+P058,Yonex Badminton Racquet v3,Sports,Yonex,2499.0
+P059,Cosco Football v3,Sports,Cosco,899.0
+P060,Atomic Habits v3,Books,Atomic,499.0
+P061,Deep Work v3,Books,Deep,399.0
+P062,Wakefit Mattress v3,Furniture,Wakefit,12999.0
+P063,Godrej Wardrobe v3,Furniture,Godrej,34999.0
+P064,Aashirvaad Atta 10Kg v3,Groceries,Aashirvaad,499.0
+P065,Amul Butter 500g v3,Groceries,Amul,275.0
+P066,Tata Salt 1Kg v3,Groceries,Tata,25.0
+P067,Samsung Galaxy S24 v4,Electronics,Samsung,89999.0
+P068,HP Pavilion Laptop v4,Electronics,HP,54999.0
+P069,Sony WH-1000XM5 v4,Electronics,Sony,29990.0
+P070,boAt Airdopes 141 v4,Electronics,boAt,1499.0
+P071,LG OLED TV 48in v4,Electronics,LG,79999.0
+P072,Levi's 511 Jeans v4,Fashion,Levi's,3999.0
+P073,Nike Air Max 270 v4,Fashion,Nike,9999.0
+P074,Titan Raga Watch v4,Fashion,Titan,6995.0
+P075,Philips Air Fryer v4,Home & Kitchen,Philips,9999.0
+P076,Prestige Induction Cooktop v4,Home & Kitchen,Prestige,2999.0
+P077,Milton Flask 1L v4,Home & Kitchen,Milton,999.0
+P078,Lakme 9to5 Foundation v4,Beauty,Lakme,699.0
+P079,Dove Body Lotion v4,Beauty,Dove,299.0
+P080,Yonex Badminton Racquet v4,Sports,Yonex,2499.0
+P081,Cosco Football v4,Sports,Cosco,899.0
+P082,Atomic Habits v4,Books,Atomic,499.0
+P083,Deep Work v4,Books,Deep,399.0
+P084,Wakefit Mattress v4,Furniture,Wakefit,12999.0
+P085,Godrej Wardrobe v4,Furniture,Godrej,34999.0
+P086,Aashirvaad Atta 10Kg v4,Groceries,Aashirvaad,499.0
+P087,Amul Butter 500g v4,Groceries,Amul,275.0
+P088,Tata Salt 1Kg v4,Groceries,Tata,25.0
+P089,Samsung Galaxy S24 v5,Electronics,Samsung,89999.0
+P090,HP Pavilion Laptop v5,Electronics,HP,54999.0
+P091,Sony WH-1000XM5 v5,Electronics,Sony,29990.0
+P092,boAt Airdopes 141 v5,Electronics,boAt,1499.0
+P093,LG OLED TV 48in v5,Electronics,LG,79999.0
+P094,Levi's 511 Jeans v5,Fashion,Levi's,3999.0
+P095,Nike Air Max 270 v5,Fashion,Nike,9999.0
+P096,Titan Raga Watch v5,Fashion,Titan,6995.0
+P097,Philips Air Fryer v5,Home & Kitchen,Philips,9999.0
+P098,Prestige Induction Cooktop v5,Home & Kitchen,Prestige,2999.0
+P099,Milton Flask 1L v5,Home & Kitchen,Milton,999.0
+P100,Lakme 9to5 Foundation v5,Beauty,Lakme,699.0
+P101,Dove Body Lotion v5,Beauty,Dove,299.0
+P102,Yonex Badminton Racquet v5,Sports,Yonex,2499.0
+P103,Cosco Football v5,Sports,Cosco,899.0
+P104,Atomic Habits v5,Books,Atomic,499.0
+P105,Deep Work v5,Books,Deep,399.0
+P106,Wakefit Mattress v5,Furniture,Wakefit,12999.0
+P107,Godrej Wardrobe v5,Furniture,Godrej,34999.0
+P108,Aashirvaad Atta 10Kg v5,Groceries,Aashirvaad,499.0
+P900,Test Item,Electronics,Brand,-100.0
+P800,Test Item,Electronics,Brand,0.0
+P700,Test Item,Misc,Brand,499.0
+,Test Item,Books,Brand,299.0
+P600,,Books,Brand,299.0
+P001,Samsung Galaxy S24,Electronics,Samsung,89999.0
+P901,Test Item,Electronics,Brand,-100.0
+P801,Test Item,Electronics,Brand,0.0
+P701,Test Item,Misc,Brand,499.0
+,Test Item,Books,Brand,299.0
+P601,,Books,Brand,299.0
+P002,HP Pavilion Laptop,Electronics,HP,54999.0
+P902,Test Item,Electronics,Brand,-100.0
+P802,Test Item,Electronics,Brand,0.0
+P702,Test Item,Misc,Brand,499.0
+,Test Item,Books,Brand,299.0
+P602,,Books,Brand,299.0
+P003,Sony WH-1000XM5,Electronics,Sony,29990.0
+P903,Test Item,Electronics,Brand,-100.0
+P803,Test Item,Electronics,Brand,0.0
+P703,Test Item,Misc,Brand,499.0
+,Test Item,Books,Brand,299.0
+P603,,Books,Brand,299.0
+P004,boAt Airdopes 141,Electronics,boAt,1499.0

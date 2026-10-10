@@ -1,99 +1,109 @@
 Product_ID,Product_Name,Category,Brand,Price
-P078,Sql For Data Analytics,Books,Packt,799.0
-P011,Lg Oled 48 Inch Tv,Electronics,Lg,79999.0
-P005,Realme Narzo 60 Pro,Electronics,Realme,19999.0
-P084,Nilkamal Study Table With Shelf,Furniture,Nilkamal,4999.0
-P063,Cosco Football Size 5,Sports,Cosco,899.0
-P068,Garmin Forerunner 255 Gps Watch,Sports,Garmin,34999.0
-P031,Adidas Ultraboost Running Shoes,Fashion,Adidas,12999.0
-P046,Milton Thermosteel Flask 1L,Home & Kitchen,Milton,999.0
-P096,Haldiram Bhujia Sev 400G,Groceries,Haldiram,179.0
-P012,Sony Bravia 43 Inch Tv,Electronics,Sony,44999.0
-P082,Pepperfry Fabric 3-Seater Sofa,Furniture,Pepperfry,24999.0
-P080,Ikigai By Hector Garcia,Books,Penguin,299.0
-P001,Samsung Galaxy S24 Ultra,Electronics,Samsung,89999.0
-P081,Wakefit Orthopaedic Memory Foam Mattress,Furniture,Wakefit,12999.0
-P019,Samsung Galaxy Tab S9,Electronics,Samsung,73999.0
-P070,Speedo Adult Swim Goggles,Sports,Speedo,799.0
-P057,Dove Body Lotion 400Ml,Beauty,Dove,299.0
-P077,Python Crash Course By Eric Matthes,Books,No Starch Press,699.0
-P043,Instant Pot Duo 7-In-1,Home & Kitchen,Instant Pot,7999.0
-P013,Boat Airdopes 141,Electronics,Boat,1499.0
-P037,Titan Raga Watch,Fashion,Titan,6995.0
-P065,Strauss Yoga Mat 6Mm,Sports,Strauss,699.0
-P027,Wrangler Regular Fit Jeans,Fashion,Wrangler,2499.0
-P023,Seagate 2Tb External Hard Drive,Electronics,Seagate,5999.0
-P032,Puma Softride Running Shoes,Fashion,Puma,4999.0
-P048,Whirlpool 265L Double Door Refrigerator,Home & Kitchen,Whirlpool,28999.0
-P016,Canon Eos R50 Camera,Electronics,Canon,54999.0
-P045,Pigeon Stainless Steel Cookware Set,Home & Kitchen,Pigeon,2999.0
-P089,Aashirvaad Atta 10Kg,Groceries,Aashirvaad,499.0
-P090,Fortune Sunflower Oil 5L,Groceries,Fortune,799.0
-P010,Samsung 55 Inch 4K Smart Tv,Electronics,Samsung,59999.0
-P034,Global Desi Printed Saree,Fashion,Global Desi,2499.0
-P056,The Ordinary Niacinamide 10% Serum,Beauty,The Ordinary,699.0
-P029,Van Heusen Slim Fit Shirt,Fashion,Van Heusen,1999.0
-P041,Prestige Induction Cooktop,Home & Kitchen,Prestige,2999.0
-P006,Dell Inspiron 15 Laptop,Electronics,Dell,62999.0
-P054,L'Oreal Paris Revitalift Serum,Beauty,L'Oreal,1299.0
-P040,Lavie Laptop Bag,Fashion,Lavie,1799.0
-P036,Fossil Gen 6 Smartwatch,Fashion,Fossil,22495.0
-P017,Nikon Z30 Mirrorless Camera,Electronics,Nikon,68999.0
-P079,The Psychology Of Money,Books,Jaico,399.0
-P035,Biba Embroidered Salwar Suit,Fashion,Biba,3499.0
-P067,Skybags Pro Cycling Helmet,Sports,Skybags,2499.0
-P008,Lenovo Ideapad Slim 5,Electronics,Lenovo,47999.0
-P044,Bosch Mixer Grinder 750W,Home & Kitchen,Bosch,4999.0
-P066,Decathlon Resistance Bands Set,Sports,Decathlon,999.0
-P073,The Alchemist By Paulo Coelho,Books,Harpercollins,299.0
-P028,Allen Solly Formal Shirt,Fashion,Allen Solly,1699.0
-P020,Logitech Mx Master 3 Mouse,Electronics,Logitech,8995.0
-P091,Tata Salt 1Kg,Groceries,Tata,25.0
-P026,Levi'S 511 Slim Fit Jeans,Fashion,Levi'S,3999.0
-P069,Fitbit Charge 6 Fitness Tracker,Sports,Fitbit,14999.0
-P050,Dyson V15 Vacuum Cleaner,Home & Kitchen,Dyson,44900.0
-P014,Sony Wh-1000Xm5 Headphones,Electronics,Sony,29990.0
-P025,Dlink Wifi Router Ac1200,Electronics,Dlink,2499.0
-P004,Redmi Note 13 Pro,Electronics,Xiaomi,24999.0
-P018,Ipad Air 5Th Generation,Electronics,Apple,59900.0
-P039,Wildcraft Backpack 30L,Fashion,Wildcraft,2299.0
-P009,Asus Vivobook 15,Electronics,Asus,44999.0
-P085,Godrej Interio Wardrobe 3 Door,Furniture,Godrej,34999.0
-P007,Hp Pavilion 14 Laptop,Electronics,Hp,54999.0
-P071,Rich Dad Poor Dad By Robert Kiyosaki,Books,Simon & Schuster,499.0
-P095,Britannia Good Day Cookies 400G,Groceries,Britannia,129.0
-P033,H&M Floral Kurta,Fashion,H&M,1299.0
-P055,Biotique Bio Honey Gel Facewash,Beauty,Biotique,299.0
-P051,Lakme 9To5 Foundation,Beauty,Lakme,699.0
-P074,Zero To One By Peter Thiel,Books,Virgin Books,399.0
-P047,Cello Opalware Dinner Set,Home & Kitchen,Cello,2499.0
-P098,Surf Excel Matic Liquid 2L,Groceries,Surf Excel,599.0
-P062,Dsc Cricket Bat Kashmir Willow,Sports,Dsc,1799.0
-P086,Green Soul Ergonomic Office Chair,Furniture,Green Soul,12999.0
-P042,Philips Air Fryer Xxl,Home & Kitchen,Philips,9999.0
-P059,Clinique Moisture Surge Moisturiser,Beauty,Clinique,3499.0
-P049,Samsung 7Kg Washing Machine,Home & Kitchen,Samsung,31999.0
-P094,Bru Gold Coffee 200G,Groceries,Bru,399.0
-P058,Himalaya Herbals Face Cream,Beauty,Himalaya,199.0
-P076,Think And Grow Rich By Napoleon Hill,Books,Fingerprint,299.0
-P060,Forest Essentials Facial Cleanser,Beauty,Forest Essentials,1295.0
-P064,Nivia Basketball,Sports,Nivia,1299.0
-P092,Amul Butter 500G,Groceries,Amul,275.0
-P038,Fastrack Sports Watch,Fashion,Fastrack,1995.0
-P030,Nike Air Max 270 Sneakers,Fashion,Nike,9999.0
-P097,Dettol Handwash Liquid 500Ml,Groceries,Dettol,179.0
-P002,Apple Iphone 15 Pro,Electronics,Apple,134999.0
-P053,Maybelline Fit Me Foundation,Beauty,Maybelline,499.0
-P022,Epson Ecotank Printer,Electronics,Epson,12999.0
-P003,Oneplus 12R,Electronics,Oneplus,39999.0
-P024,Sandisk 512Gb Usb Drive,Electronics,Sandisk,2499.0
-P088,Wooden Street King Size Bed,Furniture,Wooden Street,28999.0
-P083,Ikea Kallax Shelf Unit,Furniture,Ikea,7999.0
-P075,Deep Work By Cal Newport,Books,Piatkus,399.0
-P087,Durian Recliner Sofa Chair,Furniture,Durian,29999.0
-P021,Hp Laserjet Printer,Electronics,Hp,14999.0
-P061,Yonex Badminton Racquet,Sports,Yonex,2499.0
-P072,Atomic Habits By James Clear,Books,Penguin,499.0
-P015,Jbl Charge 5 Speaker,Electronics,Jbl,14999.0
-P093,Nestle Maggi 12 Pack,Groceries,Nestle,299.0
-P052,Nykaa Cosmetics Lip Liner,Beauty,Nykaa,299.0
+P001,Samsung Galaxy S24,Electronics,Samsung,89999.0
+P002,HP Pavilion Laptop,Electronics,HP,54999.0
+P003,Sony WH-1000XM5,Electronics,Sony,29990.0
+P004,boAt Airdopes 141,Electronics,boAt,1499.0
+P005,LG OLED TV 48in,Electronics,LG,79999.0
+P006,Levi's 511 Jeans,Fashion,Levi's,3999.0
+P007,Nike Air Max 270,Fashion,Nike,9999.0
+P008,Titan Raga Watch,Fashion,Titan,6995.0
+P009,Philips Air Fryer,Home & Kitchen,Philips,9999.0
+P010,Prestige Induction Cooktop,Home & Kitchen,Prestige,2999.0
+P011,Milton Flask 1L,Home & Kitchen,Milton,999.0
+P012,Lakme 9to5 Foundation,Beauty,Lakme,699.0
+P013,Dove Body Lotion,Beauty,Dove,299.0
+P014,Yonex Badminton Racquet,Sports,Yonex,2499.0
+P015,Cosco Football,Sports,Cosco,899.0
+P016,Atomic Habits,Books,Atomic,499.0
+P017,Deep Work,Books,Deep,399.0
+P018,Wakefit Mattress,Furniture,Wakefit,12999.0
+P019,Godrej Wardrobe,Furniture,Godrej,34999.0
+P020,Aashirvaad Atta 10Kg,Groceries,Aashirvaad,499.0
+P021,Amul Butter 500g,Groceries,Amul,275.0
+P022,Tata Salt 1Kg,Groceries,Tata,25.0
+P023,Samsung Galaxy S24 V2,Electronics,Samsung,89999.0
+P024,HP Pavilion Laptop V2,Electronics,HP,54999.0
+P025,Sony WH-1000XM5 V2,Electronics,Sony,29990.0
+P026,boAt Airdopes 141 V2,Electronics,boAt,1499.0
+P027,LG OLED TV 48in V2,Electronics,LG,79999.0
+P028,Levi's 511 Jeans V2,Fashion,Levi's,3999.0
+P029,Nike Air Max 270 V2,Fashion,Nike,9999.0
+P030,Titan Raga Watch V2,Fashion,Titan,6995.0
+P031,Philips Air Fryer V2,Home & Kitchen,Philips,9999.0
+P032,Prestige Induction Cooktop V2,Home & Kitchen,Prestige,2999.0
+P033,Milton Flask 1L V2,Home & Kitchen,Milton,999.0
+P034,Lakme 9to5 Foundation V2,Beauty,Lakme,699.0
+P035,Dove Body Lotion V2,Beauty,Dove,299.0
+P036,Yonex Badminton Racquet V2,Sports,Yonex,2499.0
+P037,Cosco Football V2,Sports,Cosco,899.0
+P038,Atomic Habits V2,Books,Atomic,499.0
+P039,Deep Work V2,Books,Deep,399.0
+P040,Wakefit Mattress V2,Furniture,Wakefit,12999.0
+P041,Godrej Wardrobe V2,Furniture,Godrej,34999.0
+P042,Aashirvaad Atta 10Kg V2,Groceries,Aashirvaad,499.0
+P043,Amul Butter 500g V2,Groceries,Amul,275.0
+P044,Tata Salt 1Kg V2,Groceries,Tata,25.0
+P045,Samsung Galaxy S24 V3,Electronics,Samsung,89999.0
+P046,HP Pavilion Laptop V3,Electronics,HP,54999.0
+P047,Sony WH-1000XM5 V3,Electronics,Sony,29990.0
+P048,boAt Airdopes 141 V3,Electronics,boAt,1499.0
+P049,LG OLED TV 48in V3,Electronics,LG,79999.0
+P050,Levi's 511 Jeans V3,Fashion,Levi's,3999.0
+P051,Nike Air Max 270 V3,Fashion,Nike,9999.0
+P052,Titan Raga Watch V3,Fashion,Titan,6995.0
+P053,Philips Air Fryer V3,Home & Kitchen,Philips,9999.0
+P054,Prestige Induction Cooktop V3,Home & Kitchen,Prestige,2999.0
+P055,Milton Flask 1L V3,Home & Kitchen,Milton,999.0
+P056,Lakme 9to5 Foundation V3,Beauty,Lakme,699.0
+P057,Dove Body Lotion V3,Beauty,Dove,299.0
+P058,Yonex Badminton Racquet V3,Sports,Yonex,2499.0
+P059,Cosco Football V3,Sports,Cosco,899.0
+P060,Atomic Habits V3,Books,Atomic,499.0
+P061,Deep Work V3,Books,Deep,399.0
+P062,Wakefit Mattress V3,Furniture,Wakefit,12999.0
+P063,Godrej Wardrobe V3,Furniture,Godrej,34999.0
+P064,Aashirvaad Atta 10Kg V3,Groceries,Aashirvaad,499.0
+P065,Amul Butter 500g V3,Groceries,Amul,275.0
+P066,Tata Salt 1Kg V3,Groceries,Tata,25.0
+P067,Samsung Galaxy S24 V4,Electronics,Samsung,89999.0
+P068,HP Pavilion Laptop V4,Electronics,HP,54999.0
+P069,Sony WH-1000XM5 V4,Electronics,Sony,29990.0
+P070,boAt Airdopes 141 V4,Electronics,boAt,1499.0
+P071,LG OLED TV 48in V4,Electronics,LG,79999.0
+P072,Levi's 511 Jeans V4,Fashion,Levi's,3999.0
+P073,Nike Air Max 270 V4,Fashion,Nike,9999.0
+P074,Titan Raga Watch V4,Fashion,Titan,6995.0
+P075,Philips Air Fryer V4,Home & Kitchen,Philips,9999.0
+P076,Prestige Induction Cooktop V4,Home & Kitchen,Prestige,2999.0
+P077,Milton Flask 1L V4,Home & Kitchen,Milton,999.0
+P078,Lakme 9to5 Foundation V4,Beauty,Lakme,699.0
+P079,Dove Body Lotion V4,Beauty,Dove,299.0
+P080,Yonex Badminton Racquet V4,Sports,Yonex,2499.0
+P081,Cosco Football V4,Sports,Cosco,899.0
+P082,Atomic Habits V4,Books,Atomic,499.0
+P083,Deep Work V4,Books,Deep,399.0
+P084,Wakefit Mattress V4,Furniture,Wakefit,12999.0
+P085,Godrej Wardrobe V4,Furniture,Godrej,34999.0
+P086,Aashirvaad Atta 10Kg V4,Groceries,Aashirvaad,499.0
+P087,Amul Butter 500g V4,Groceries,Amul,275.0
+P088,Tata Salt 1Kg V4,Groceries,Tata,25.0
+P089,Samsung Galaxy S24 V5,Electronics,Samsung,89999.0
+P090,HP Pavilion Laptop V5,Electronics,HP,54999.0
+P091,Sony WH-1000XM5 V5,Electronics,Sony,29990.0
+P092,boAt Airdopes 141 V5,Electronics,boAt,1499.0
+P093,LG OLED TV 48in V5,Electronics,LG,79999.0
+P094,Levi's 511 Jeans V5,Fashion,Levi's,3999.0
+P095,Nike Air Max 270 V5,Fashion,Nike,9999.0
+P096,Titan Raga Watch V5,Fashion,Titan,6995.0
+P097,Philips Air Fryer V5,Home & Kitchen,Philips,9999.0
+P098,Prestige Induction Cooktop V5,Home & Kitchen,Prestige,2999.0
+P099,Milton Flask 1L V5,Home & Kitchen,Milton,999.0
+P100,Lakme 9to5 Foundation V5,Beauty,Lakme,699.0
+P101,Dove Body Lotion V5,Beauty,Dove,299.0
+P102,Yonex Badminton Racquet V5,Sports,Yonex,2499.0
+P103,Cosco Football V5,Sports,Cosco,899.0
+P104,Atomic Habits V5,Books,Atomic,499.0
+P105,Deep Work V5,Books,Deep,399.0
+P106,Wakefit Mattress V5,Furniture,Wakefit,12999.0
+P107,Godrej Wardrobe V5,Furniture,Godrej,34999.0
+P108,Aashirvaad Atta 10Kg V5,Groceries,Aashirvaad,499.0
